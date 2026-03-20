@@ -122,7 +122,7 @@ double ray_dist(t_cordinate p, double ray_angle, char **map, int *face)
 void render(t_data *img, char **map, t_cordinate player_pos, double fov)
 {
 	int i = 0;
-	double p_angle = -PI / 2.0 + -30 * PI / 180.0; // keep previous player angle behavior
+	double p_angle = -PI / 4.0; // keep previous player angle behavior
 	while (i < SCREEN_WIDTH)
 	{
 		int wall_face;
@@ -145,9 +145,9 @@ void render(t_data *img, char **map, t_cordinate player_pos, double fov)
 			wall_color = 0x0000FF;
 		else if (wall_face == FACE_NORTH)
 			wall_color = 0x00FFFF;
-		//draw_vertical_line(img, i, 0, y_lo - 1, 0xFF0000);
+		draw_vertical_line(img, i, 0, y_lo - 1, 0xFF000F);
 		draw_vertical_line(img, i, max(0, y_lo), min(SCREEN_HEIGHT - 1, y_hi), wall_color);
-		//draw_vertical_line(img, i, y_hi + 1, SCREEN_HEIGHT - 1, 0x0000FF);
+		draw_vertical_line(img, i, y_hi + 1, SCREEN_HEIGHT - 1, 0xD000FF);
 		i++;
 	}
 }
@@ -160,10 +160,10 @@ int	main()
 	t_data img;
 	char *map[6] = {
 		"11111111",
+		"10001001",
 		"10000001",
-		"10100001",
+		"1P000101",
 		"10000001",
-		"1000P001",
 		"11111111"
 	};
 	t_cordinate player_pos;
@@ -171,8 +171,8 @@ int	main()
 	win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "RenderV1");
 	img.img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	player_pos.x = 4 * TILE_SIZE + TILE_SIZE / 2.0; // player is in the center of the tile
-	player_pos.y = 4 * TILE_SIZE + TILE_SIZE / 2.0; // player is in the center of the tile
+	player_pos.x = 2 * TILE_SIZE + TILE_SIZE / 2.0; // player is in the center of the tile
+	player_pos.y = 3 * TILE_SIZE + TILE_SIZE / 2.0; // player is in the center of the tile
 	render(&img, map, player_pos, fov);
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
 	mlx_loop(mlx);
