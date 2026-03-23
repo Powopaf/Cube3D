@@ -54,6 +54,32 @@ Farther hit = shorter wall slice
 
 ### How it works
 
+first of all the map is in 2D so when on the camera we can divide what the player see in 3 zones.
+
+![Fig 1](./Picture/image.png "Fig 1")
+
+For each column of the screen we are going to calculate where the limit between the ceilong and the wall is and same for the wall and the floor.
+It give us the following equation
+
+$y_{lo} = \frac{SCREEN\_HEIGHT - TILE\_SIZE}{2} \cdot \frac{projdist}{perpdist}\\$
+
+$y_{hi} = \frac{SCREEN\_HEIGHT + TILE\_SIZE}{2} \cdot \frac{projdist}{perpdist}$
+
+Where $projdist$ is the distance bettween the projection plane(screen in fig1) and the camera.
+
+So $projdist$ is a constant equal to:
+
+$projdist = \frac{SCREEN\_WIDTH}{ 2 \cdot \tan(\frac{fov}{2})}$
+
+$perpdist$ is the distance of the wall with a correction to not have distortion (fish eye correction).
+
+$perpdist = ray\_len \cdot \cos(ray\_angle - p\_angle)$
+
+$p\_angle$ is the the angle of where the player is looking.
+
+Now all we ahve to do it to shoot a ray and return the distance of where it met the wall.
+
+
 ## Ressources
 
 https://lodev.org/cgtutor/raycasting.html \
