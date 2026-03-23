@@ -77,11 +77,63 @@ $perpdist = ray\_len \cdot \cos(ray\_angle - p\_angle)$
 
 $p\_angle$ is the the angle of where the player is looking.
 
+$ray\_angle$ is the current angle of the ray for the $i$ screen column. It give us the followig equation.
+
+$ray\_angle = p\_angle + \arctan(c_x \cdot \tan(\frac{fov}{2}))$
+
+Whit $c_x$ the camera plane x coordinate for the current ray:
+$c_x = \frac{2(i + 0.5)}{SCREEN\_WIDTH - 1}$
+
 Now all we ahve to do it to shoot a ray and return the distance of where it met the wall.
 
+To do so we appl ythe following idea:
+
+To find the first wall that a ray encounters on its way, you have to let it start at the player's position, and then all the time, check whether or not the ray is inside a wall.
+
+A human can immediatly see where the ray hits the wall, but it's impossible to find which square the ray hits immediatly with a single formula, because a computer can only check a finite number of positions on the ray. Many raycasters add a constant value to the ray each step, but then there's a chance that it may miss a wall! For example, with this red ray, its position was checked at every red spot:
+
+![Fig 2](./Picture/image2.png "Fig 3")
+
+To avoid that we can define a smaller step as we can see bellow.
+
+![Fig 3](./Picture/image1.png "Fig 3")
+
+The basics information we need to 'shoot' the ray is the angle of it and the player coordinate.
+
+We calculate the direction vector of the ray by converting the ray angle into x and y components:
+
+$dir_x = \cos(ray\_angle)\\$
+$dir_y = \sin(ray\_angle)$
+
+and respectively $ray_x, ray_y$ the current position where we check if there is a wall. They start at the play current position.
+
+Then while we don't meet a wall wall we update $ray_x, ray_y$
+
+$ray_x = dir_x \cdot step\\$
+$ray_y = dir_y \cdot step$
+
+they to get the current position in the map all we need to do is
+
+$map_x = \frac{ray_x}{TILE\_SIZE}\\$
+$map_y = \frac{ray_y}{TILE\_SIZE}$
+
+if the value of $map_x, map_y$ are out of bound it means we did not meet any wall thus the distance return is `INFINITY`¹. If it's not out of bound 2 cases we have met a wall.
+
+In this case we return the following:
+
+$\sqrt{d_x² + d_y²}$
+
+Where $d_x$ and $d_y$ are\
+$d_x = ray_x - p_x\\$
+$d_x = ray_y - p_y\\$
+$p_x, p_y$ the position of the player
 
 ## Ressources
 
 https://lodev.org/cgtutor/raycasting.html \
 https://timallanwheeler.com/blog/2023/04/01/wolfenstein-3d-raycasting-in-c/ \
 https://harm-smits.github.io/42docs/libs/minilibx
+
+## Annex
+
+¹: The INFINITY macro represents positive floating-point infinity and evaluates to a constant expression of type float. It is implemented using the compiler built-in function __builtin_inff().
