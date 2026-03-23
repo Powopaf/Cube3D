@@ -84,6 +84,8 @@ $ray\_angle = p\_angle + \arctan(c_x \cdot \tan(\frac{fov}{2}))$
 Whit $c_x$ the camera plane x coordinate for the current ray:
 $c_x = \frac{2(i + 0.5)}{SCREEN\_WIDTH - 1}$
 
+### Shoot rays
+
 Now all we ahve to do it to shoot a ray and return the distance of where it met the wall.
 
 To do so we appl ythe following idea:
@@ -127,6 +129,23 @@ Where $d_x$ and $d_y$ are\
 $d_x = ray_x - p_x\\$
 $d_x = ray_y - p_y\\$
 $p_x, p_y$ the position of the player
+
+### Find the Face
+
+A something require to do in the project is to know wich face for the wall we are facing.
+
+To do that we compare the stating position of the rays to the position where we hit a wall.
+
+So:
+
+1. `map_x != prev_x` :
+    1. `dir_x > 0` -> West face
+    2. `dir_x <= 0` -> East face
+2. `map_y != prev_y`
+    1. `dir_y > 0` -> North face
+    2. `dir_y <= 0` -> South face
+
+With `prev_x` qnd `prev_y` the init coordinate of the player in the map.
 
 ## Ressources
 
