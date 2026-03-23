@@ -6,13 +6,12 @@
 
 Cube3D is a first-person 3D rendering project built in C as part of the 42 curriculum.
 It uses a classic raycasting approach with MiniLibX to project a 2D grid map into a pseudo-3D scene, including wall-slice rendering, face-based wall coloring, and basic floor/ceiling drawing.
-The project is currently in a prototype stage, with rendering logic in place and parser/game features to be expanded.
 
 ## Instructions
 
-To build the project make install those librairies: \
-`sudo apt update && sudo apt install xorg libxext-dev zlib1g-dev libbsd-dev`
-They are needed for the compilation of the minilibx. Then `make` and you can launch the game with `./cub3D`
+To build the project, first install the required libraries:\
+`sudo apt update && sudo apt install xorg libxext-dev zlib1g-dev libbsd-dev`\
+These packages are needed to compile MiniLibX. Then run `make`, and launch the game with `./cub3D.`
 
 ### Map
 
@@ -54,41 +53,41 @@ Farther hit = shorter wall slice
 
 ### How it works
 
-first of all the map is in 2D so when on the camera we can divide what the player see in 3 zones.
+For each screen column, we compute the boundary between the ceiling and the wall, and the boundary between the wall and the floor. This gives the following equations:
 
 ![Fig 1](./Picture/image.png "Fig 1")
 
 For each column of the screen we are going to calculate where the limit between the ceilong and the wall is and same for the wall and the floor.
 It give us the following equation
 
-$y_{lo} = \frac{SCREEN\_HEIGHT - TILE\_SIZE}{2} \cdot \frac{projdist}{perpdist}\\$
+$y_{lo} = \frac{SCREEN\_HEIGHT - TILE\_SIZE}{2} \cdot \frac{projdist}{perpdist}$
 
 $y_{hi} = \frac{SCREEN\_HEIGHT + TILE\_SIZE}{2} \cdot \frac{projdist}{perpdist}$
 
-Where $projdist$ is the distance bettween the projection plane(screen in fig1) and the camera.
+Where $projdist$ is the distance between the projection plane (shown in the figures above) and the camera.
 
-So $projdist$ is a constant equal to:
+So $projdist$ is a constant given by:
 
 $projdist = \frac{SCREEN\_WIDTH}{ 2 \cdot \tan(\frac{fov}{2})}$
 
-$perpdist$ is the distance of the wall with a correction to not have distortion (fish eye correction).
+$perpdist$ is the wall distance corrected to remove fisheye distortion.
 
 $perpdist = ray\_len \cdot \cos(ray\_angle - p\_angle)$
 
-$p\_angle$ is the the angle of where the player is looking.
+$p\_angle$ is the angle the player is facing.
 
-$ray\_angle$ is the current angle of the ray for the $i$ screen column. It give us the followig equation.
+$ray\_angle$ is the angle of the ray for screen column $i$. It is given by the following equation.
 
 $ray\_angle = p\_angle + \arctan(c_x \cdot \tan(\frac{fov}{2}))$
 
-Whit $c_x$ the camera plane x coordinate for the current ray:
+Whith $c_x$ the camera plane x coordinate for the current ray:
 $c_x = \frac{2(i + 0.5)}{SCREEN\_WIDTH - 1}$
 
 ### Shoot rays
 
-Now all we ahve to do it to shoot a ray and return the distance of where it met the wall.
+Now all we have to do is to shoot a ray and return the distance of where it met the wall.
 
-To do so we appl ythe following idea:
+To do so we apply the following idea:
 
 To find the first wall that a ray encounters on its way, you have to let it start at the player's position, and then all the time, check whether or not the ray is inside a wall.
 
@@ -100,41 +99,45 @@ To avoid that we can define a smaller step as we can see bellow.
 
 ![Fig 3](./Picture/image1.png "Fig 3")
 
-The basics information we need to 'shoot' the ray is the angle of it and the player coordinate.
+The basic information needed to cast a ray is its angle and the player’s coordinates.
 
 We calculate the direction vector of the ray by converting the ray angle into x and y components:
 
 $dir_x = \cos(ray\_angle)\\$
 $dir_y = \sin(ray\_angle)$
 
-and respectively $ray_x, ray_y$ the current position where we check if there is a wall. They start at the play current position.
+$ray_x$ and $ray_y$ are the current ray coordinates where we check for a wall. They start at the player’s current position.
 
 Then while we don't meet a wall wall we update $ray_x, ray_y$
 
-$ray_x = dir_x \cdot step\\$
+$ray_x = dir_x \cdot step$
+
 $ray_y = dir_y \cdot step$
 
 they to get the current position in the map all we need to do is
 
-$map_x = \frac{ray_x}{TILE\_SIZE}\\$
+$map_x = \frac{ray_x}{TILE\_SIZE}$
+
 $map_y = \frac{ray_y}{TILE\_SIZE}$
 
-if the value of $map_x, map_y$ are out of bound it means we did not meet any wall thus the distance return is `INFINITY`¹. If it's not out of bound 2 cases we have met a wall.
+If the value of $map_x$ or $map_y$ are out of bound it means we did not meet any walls thus distance return is `INFINITY`¹. If it's not out of bound 2 case to determine the wall hit.
 
 In this case we return the following:
 
 $\sqrt{d_x² + d_y²}$
 
 Where $d_x$ and $d_y$ are\
-$d_x = ray_x - p_x\\$
-$d_x = ray_y - p_y\\$
+$d_x = ray_x - p_x$
+
+$d_x = ray_y - p_y$
+
 $p_x, p_y$ the position of the player
 
 ### Find the Face
 
-A something require to do in the project is to know wich face for the wall we are facing.
+One requirement of the project is to determine which face of the wall the ray hits.
 
-To do that we compare the stating position of the rays to the position where we hit a wall.
+To do this, we compare the ray’s previous grid position with the position where it hits the wall.
 
 So:
 
@@ -145,7 +148,7 @@ So:
     1. `dir_y > 0` -> North face
     2. `dir_y <= 0` -> South face
 
-With `prev_x` qnd `prev_y` the init coordinate of the player in the map.
+Where `prev_x` and `prev_y` are the player’s initial coordinates on the
 
 ## Ressources
 
