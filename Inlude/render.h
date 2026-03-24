@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 10:34:28 by pifourni          #+#    #+#             */
-/*   Updated: 2026/03/24 12:40:37 by pifourni         ###   ########.fr       */
+/*   Created: 2026/03/24 10:56:20 by pifourni          #+#    #+#             */
+/*   Updated: 2026/03/24 12:40:04 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef RENDER_H
+# define RENDER_H
+
 #include "mlx_struct.h"
+#include "struct.h"
 
-int main(int argc, char** argv)
+/*
+* TILE_SIZE = min(SCREEN_WIDTH / MAP_WIDTH, SCREEN_HEIGHT / MAP_HEIGHT)
+*/
+#define TILE_SIZE 120
+#define PI 3.14159265358979323846
+#define max(a, b) ((a) > (b) ? (a) : (b))
+#define min(a, b) ((a) < (b) ? (a) : (b))
+#define FOV PI / 3.0
+
+enum Face
 {
-	void	*mlx;
-	void	*win;
-	t_data	img;
+	FACE_UNKNOWN,
+	FACE_NORTH,
+	FACE_SOUTH,
+	FACE_EAST,
+	FACE_WEST
+};
 
-}
+void render(t_data *img, char **map, t_player p);
 
-static void mlx_init_img(t_data* img, void* mlx)
-{
-	img->img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
-}
+#endif

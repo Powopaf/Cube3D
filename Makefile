@@ -3,19 +3,19 @@ CFLAGS =  -Wall -Wextra -Werror -MMD -MP -g -fsanitize=address
 NAME = cub3D
 LIBS = -fsanitize=address
 
-SRC =
+SRC = main.c
 
-OBJ = $(addprefix .obj/,$(SRC:.cpp=.o))
-DEP = $(addprefix .obj/,$(SRC:.cpp=.d))
+OBJ = $(addprefix .obj/,$(SRC:.c=.o))
+DEP = $(addprefix .obj/,$(SRC:.c=.d))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) -o $(NAME) $+ $(LIBS)
 
-.obj/%.o: %.cpp
+.obj/%.o: %.c
 	@mkdir -p .obj
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I. -IInlude -Iminilibx-linux -c $< -o $@
 
 -include $(DEP)
 

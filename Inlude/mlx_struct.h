@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mlx_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 10:34:28 by pifourni          #+#    #+#             */
-/*   Updated: 2026/03/24 12:40:37 by pifourni         ###   ########.fr       */
+/*   Created: 2026/03/24 10:56:11 by pifourni          #+#    #+#             */
+/*   Updated: 2026/03/24 11:03:36 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "mlx_struct.h"
+#ifndef MLX_STRUCT_H
+# define MLX_STRUCT_H
 
-int main(int argc, char** argv)
-{
-	void	*mlx;
-	void	*win;
-	t_data	img;
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 
-}
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
 
-static void mlx_init_img(t_data* img, void* mlx)
-{
-	img->img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
-}
+#endif

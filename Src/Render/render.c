@@ -156,7 +156,7 @@ int	main()
 {
 	void	*mlx;
 	void	*win;
-	double fov = 60 * (double)PI / 180.0; // convert fov to radians
+	double fov = 60 * (double)PI / 180.0; // convert fov to radians must be a macro
 	t_data img;
 	char *map[6] = {
 		"11111111",
