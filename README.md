@@ -60,28 +60,28 @@ For each screen column, we compute the boundary between the ceiling and the wall
 For each column of the screen we are going to calculate where the limit between the ceilong and the wall is and same for the wall and the floor.
 It give us the following equation
 
-$y_{lo} = \frac{SCREEN\_HEIGHT - TILE\_SIZE}{2} \cdot \frac{projdist}{perpdist}$
+$y_{lo} = \frac{SCREEN-HEIGHT - TILE-SIZE}{2} \cdot \frac{projdist}{perpdist}$
 
-$y_{hi} = \frac{SCREEN\_HEIGHT + TILE\_SIZE}{2} \cdot \frac{projdist}{perpdist}$
+$y_{hi} = \frac{SCREEN-HEIGHT + TILE-SIZE}{2} \cdot \frac{projdist}{perpdist}$
 
 Where $projdist$ is the distance between the projection plane (shown in the figures above) and the camera.
 
 So $projdist$ is a constant given by:
 
-$projdist = \frac{SCREEN\_WIDTH}{ 2 \cdot \tan(\frac{fov}{2})}$
+$projdist = \frac{SCREEN-WIDTH}{ 2 \cdot \tan(\frac{fov}{2})}$
 
 $perpdist$ is the wall distance corrected to remove fisheye distortion.
 
-$perpdist = ray\_len \cdot \cos(ray\_angle - p\_angle)$
+$perpdist = ray-len \cdot \cos(ray-angle - p-angle)$
 
-$p\_angle$ is the angle the player is facing.
+$p-angle$ is the angle the player is facing.
 
-$ray\_angle$ is the angle of the ray for screen column $i$. It is given by the following equation.
+$ray-angle$ is the angle of the ray for screen column $i$. It is given by the following equation.
 
-$ray\_angle = p\_angle + \arctan(c_x \cdot \tan(\frac{fov}{2}))$
+$ray-angle = p-angle + \arctan(c_x \cdot \tan(\frac{fov}{2}))$
 
 Whith $c_x$ the camera plane x coordinate for the current ray:
-$c_x = \frac{2(i + 0.5)}{SCREEN\_WIDTH - 1}$
+$c_x = \frac{2(i + 0.5)}{SCREEN-WIDTH - 1}$
 
 ### Shoot rays
 
@@ -103,8 +103,8 @@ The basic information needed to cast a ray is its angle and the player’s coord
 
 We calculate the direction vector of the ray by converting the ray angle into x and y components:
 
-$dir_x = \cos(ray\_angle)\\$
-$dir_y = \sin(ray\_angle)$
+$dir_x = \cos(ray-angle)\\$
+$dir_y = \sin(ray-angle)$
 
 $ray_x$ and $ray_y$ are the current ray coordinates where we check for a wall. They start at the player’s current position.
 
@@ -116,9 +116,9 @@ $ray_y = dir_y \cdot step$
 
 they to get the current position in the map all we need to do is
 
-$map_x = \frac{ray_x}{TILE\_SIZE}$
+$map_x = \frac{ray_x}{TILE-SIZE}$
 
-$map_y = \frac{ray_y}{TILE\_SIZE}$
+$map_y = \frac{ray_y}{TILE-SIZE}$
 
 If the value of $map_x$ or $map_y$ are out of bound it means we did not meet any walls thus distance return is `INFINITY`¹. If it's not out of bound 2 case to determine the wall hit.
 
