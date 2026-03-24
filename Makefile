@@ -15,7 +15,7 @@ $(NAME): $(OBJ)
 
 .obj/%.o: %.c
 	@mkdir -p .obj
-	$(CC) $(CFLAGS) -I. -IIinclude -c $< -o $@
+	$(CC) $(CFLAGS) -I. -IInlude -Iminilibx-linux -c $< -o $@
 
 -include $(DEP)
 

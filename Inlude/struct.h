@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 10:34:28 by pifourni          #+#    #+#             */
-/*   Updated: 2026/03/24 12:40:37 by pifourni         ###   ########.fr       */
+/*   Created: 2026/03/24 10:58:28 by pifourni          #+#    #+#             */
+/*   Updated: 2026/03/24 11:03:48 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "mlx_struct.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-int main(int argc, char** argv)
+typedef struct s_player
 {
-	void	*mlx;
-	void	*win;
-	t_data	img;
+	double x;
+	double y;
+	double angle;
+} t_player;
 
-}
-
-static void mlx_init_img(t_data* img, void* mlx)
-{
-	img->img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
-}
+#endif
