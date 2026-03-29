@@ -1,0 +1,160 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extract_path.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/26 17:23:59 by sbrochar          #+#    #+#             */
+/*   Updated: 2026/03/26 17:25:18 by sbrochar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../gnl.h"
+#include "parser.h"
+
+int	extract_color(char *tmp, int i)
+{
+	int	r;
+	int	g;
+	int	b;
+	int	index_tmp;
+
+	r = 0;
+	g = 0;
+	b = 0;
+	i++;
+	while (tmp[i] == ' ')
+		i++;
+	index_tmp = i;
+	while (tmp[i] >= '0' && tmp[i] <= '9')
+	{
+		r = (r * 10) + (tmp[i] - '0');
+		i++;
+	}
+	if (i == index_tmp)
+		return (write(2, "Wrong color code\n", 18), -1);
+	while (tmp[i] == ' ')
+		i++;
+	if (tmp[i] != ',')
+		return (write(2, "Wrong color code\n", 18), -1);
+	i++;
+	while (tmp[i] == ' ')
+		i++;
+	index_tmp = i;
+	while (tmp[i] >= '0' && tmp[i] <= '9')
+	{
+		g = (g * 10) + (tmp[i] - '0');
+		i++;
+	}
+	if (i == index_tmp)
+		return (write(2, "Wrong color code\n", 18), -1);
+	while (tmp[i] == ' ')
+		i++;
+	if (tmp[i] != ',')
+		return (write(2, "Wrong color code\n", 18), -1);
+	i++;
+	while (tmp[i] == ' ')
+		i++;
+	index_tmp = i;
+	while (tmp[i] >= '0' && tmp[i] <= '9')
+	{
+		b = (b * 10) + (tmp[i] - '0');
+		i++;
+	}
+	if (i == index_tmp)
+		return (write(2, "Wrong color code\n", 18), -1);
+	while (tmp[i] == ' ')
+		i++;
+	if (tmp[i] != '\n' && tmp[i] != '\0')
+		return (write(2, "Wrong color code\n", 18), -1);
+	if (r > 255 || g > 255 || b > 255)
+		return (write(2, "Wrong color code\n", 18), -1);
+	return ((r << 16) | (g << 8) | b);
+}
+
+char	*extract_path_texture(char *tmp, int i)
+{
+	int		len_path;
+	char	*path;
+	int		j;
+
+	i = i + 2;
+	len_path = 0;
+	while (tmp[i] == ' ')
+		i++;
+	j = i;
+	while (tmp[j] != ' ' && tmp[j] != '\n' && tmp[j] != '\0')
+	{
+		len_path++;
+		j++;
+	}
+	path = ft_substr(tmp, i, len_path);
+	return (path);
+}
+
+void	count_line_map(char *tmp, t_map *map)
+{
+	int	i;
+	int	tmp_color;
+
+	i = 0;
+	while (tmp[i] == ' ')
+		i++;
+	if (tmp[i] == 'N' && tmp[i + 1] == 'O' && tmp[i + 2] == ' ')
+	{
+		if (map->texture_north == NULL)
+		{
+			map->texture_north = extract_path_texture(tmp, i);
+			map->counter++;
+		}
+	}
+	if (tmp[i] == 'S' && tmp[i + 1] == 'O' && tmp[i + 2] == ' ')
+	{
+		if (map->texture_south == NULL)
+		{
+			map->texture_south = extract_path_texture(tmp, i);
+			map->counter++;
+		}
+	}
+	if (tmp[i] == 'W' && tmp[i + 1] == 'E' && tmp[i + 2] == ' ')
+	{
+		if (map->texture_west == NULL)
+		{
+			map->texture_west = extract_path_texture(tmp, i);
+			map->counter++;
+		}
+	}
+	if (tmp[i] == 'E' && tmp[i + 1] == 'A' && tmp[i + 2] == ' ')
+	{
+		if (map->texture_east == NULL)
+		{
+			map->texture_east = extract_path_texture(tmp, i);
+			map->counter++;
+		}
+	}
+	if (tmp[i] == 'F' && tmp[i + 1] == ' ')
+	{
+		tmp_color = extract_color(tmp, i);
+		if (map->color_floor == -1)
+		{
+			if (tmp_color != -1)
+			{
+				map->color_floor = tmp_color;
+				map->counter++;
+			}
+		}
+	}
+	if (tmp[i] == 'C' && tmp[i + 1] == ' ')
+	{
+		tmp_color = extract_color(tmp, i);
+		if (map->color_sky == -1)
+		{
+			if (tmp_color != -1)
+			{
+				map->color_sky = tmp_color;
+				map->counter++;
+			}
+		}
+	}
+}
