@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:42:06 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/27 17:44:32 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/03/30 17:16:25 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdbool.h>
 # include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 
 typedef struct s_node_map
@@ -55,5 +56,10 @@ int	extract_color(char *tmp, int i);
 char	*extract_path_texture(char *tmp, int i);
 void	count_line_map(char *tmp, t_map *map);
 void	read_map(t_map *map, char *filename);
+void	add_map_line(t_map *map, char *line);
+void	convert_map_to_tab_char(t_map *map);
+char	*pad_map_line(t_node_map *current, t_map *map);
+
+
 
 #endif

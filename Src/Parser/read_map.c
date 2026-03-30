@@ -6,12 +6,12 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:31:38 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/27 17:55:38 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/03/30 17:25:40 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../gnl.h"
-#include "parser.h"
+#include "../parser.h"
 
 void	add_map_line(t_map *map, char *line)
 {
@@ -78,5 +78,58 @@ void	read_map(t_map *map, char *filename)
 			add_map_line(map, line);
 		line = get_next_line(fd);
 	}
+	convert_map_to_tab_char(map);
 	close(fd);
+}
+
+void	convert_map_to_tab_char(t_map *map)
+{
+	int			i;
+	t_node_map	*current;
+	t_node_map	*tmp;
+
+	current = map->node_map;
+	i = 0;
+	map->map = malloc((sizeof(char *)) * (map->map_height + 1));
+	if (!map->map)
+		return ;
+	while (current != NULL)
+	{
+		map->map[i] = pad_map_line(current, map);
+		current = current->next;
+		i++;
+	}
+	map->map[i] = NULL;
+	current = map->node_map;
+	while (current != NULL)
+	{
+		free(current->read_line);
+		tmp = current->next;
+		free(current);
+		current = tmp;
+	}
+	map->node_map = NULL;
+}
+
+char	*pad_map_line(t_node_map *current, t_map *map)
+{
+	char	*padded_line;
+	int		i;
+
+	i = 0;
+	padded_line = malloc(sizeof(char) * map->map_width + 1);
+	if (!padded_line)
+		return (NULL);
+	while (current->read_line[i] != '\0')
+	{
+		padded_line[i] = current->read_line[i];
+		i++;
+	}
+	while (i < map->map_width)
+	{
+		padded_line[i] = ' ';
+		i++;
+	}
+	padded_line[i] = '\0';
+	return (padded_line);
 }

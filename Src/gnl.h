@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:45:45 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/25 20:46:47 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/03/30 17:26:03 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 
 # include "parser.h"
+#include <stddef.h>
 # include <fcntl.h>
 # include <sys/stat.h>
 

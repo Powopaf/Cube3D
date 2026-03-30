@@ -6,12 +6,12 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 17:23:59 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/26 17:25:18 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/03/30 17:16:51 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../gnl.h"
-#include "parser.h"
+#include "../parser.h"
 
 int	extract_color(char *tmp, int i)
 {

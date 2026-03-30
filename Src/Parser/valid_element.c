@@ -6,11 +6,11 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:53:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/16 18:37:33 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/03/30 17:25:43 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../parser.h"
 
 void	store_map_info(char c, t_map *map, int x, int y)
 {
