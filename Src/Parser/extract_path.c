@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 17:23:59 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/30 17:16:51 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 12:17:11 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,17 @@ int	extract_color(char *tmp, int i)
 		i++;
 	}
 	if (i == index_tmp)
-		return (write(2, "Wrong color code\n", 18), -1);
+	{
+		printf("Wrong color code\n");
+		return (-1);
+	}
 	while (tmp[i] == ' ')
 		i++;
 	if (tmp[i] != ',')
-		return (write(2, "Wrong color code\n", 18), -1);
+	{
+		printf("Wrong color code\n");
+		return (-1);
+	}
 	i++;
 	while (tmp[i] == ' ')
 		i++;
@@ -48,11 +54,17 @@ int	extract_color(char *tmp, int i)
 		i++;
 	}
 	if (i == index_tmp)
-		return (write(2, "Wrong color code\n", 18), -1);
+	{
+		printf("Wrong color code\n");
+		return (-1);
+	}
 	while (tmp[i] == ' ')
 		i++;
 	if (tmp[i] != ',')
-		return (write(2, "Wrong color code\n", 18), -1);
+	{
+		printf("Wrong color code\n");
+		return (-1);
+	}
 	i++;
 	while (tmp[i] == ' ')
 		i++;
@@ -63,13 +75,22 @@ int	extract_color(char *tmp, int i)
 		i++;
 	}
 	if (i == index_tmp)
-		return (write(2, "Wrong color code\n", 18), -1);
+	{
+		printf("Wrong color code\n");
+		return (-1);
+	}
 	while (tmp[i] == ' ')
 		i++;
 	if (tmp[i] != '\n' && tmp[i] != '\0')
-		return (write(2, "Wrong color code\n", 18), -1);
+	{
+		printf("Wrong color code\n");
+		return (-1);
+	}
 	if (r > 255 || g > 255 || b > 255)
-		return (write(2, "Wrong color code\n", 18), -1);
+	{
+		printf("Wrong color code\n");
+		return (-1);
+	}
 	return ((r << 16) | (g << 8) | b);
 }
 
@@ -93,7 +114,7 @@ char	*extract_path_texture(char *tmp, int i)
 	return (path);
 }
 
-void	count_line_map(char *tmp, t_map *map)
+int	count_line_map(char *tmp, t_map *map)
 {
 	int	i;
 	int	tmp_color;
@@ -107,6 +128,7 @@ void	count_line_map(char *tmp, t_map *map)
 		{
 			map->texture_north = extract_path_texture(tmp, i);
 			map->counter++;
+			return (0);
 		}
 	}
 	if (tmp[i] == 'S' && tmp[i + 1] == 'O' && tmp[i + 2] == ' ')
@@ -115,6 +137,7 @@ void	count_line_map(char *tmp, t_map *map)
 		{
 			map->texture_south = extract_path_texture(tmp, i);
 			map->counter++;
+			return (0);
 		}
 	}
 	if (tmp[i] == 'W' && tmp[i + 1] == 'E' && tmp[i + 2] == ' ')
@@ -123,6 +146,7 @@ void	count_line_map(char *tmp, t_map *map)
 		{
 			map->texture_west = extract_path_texture(tmp, i);
 			map->counter++;
+			return (0);
 		}
 	}
 	if (tmp[i] == 'E' && tmp[i + 1] == 'A' && tmp[i + 2] == ' ')
@@ -131,6 +155,7 @@ void	count_line_map(char *tmp, t_map *map)
 		{
 			map->texture_east = extract_path_texture(tmp, i);
 			map->counter++;
+			return (0);
 		}
 	}
 	if (tmp[i] == 'F' && tmp[i + 1] == ' ')
@@ -142,7 +167,10 @@ void	count_line_map(char *tmp, t_map *map)
 			{
 				map->color_floor = tmp_color;
 				map->counter++;
+				return (0);
 			}
+			else
+				return (1);
 		}
 	}
 	if (tmp[i] == 'C' && tmp[i + 1] == ' ')
@@ -154,7 +182,14 @@ void	count_line_map(char *tmp, t_map *map)
 			{
 				map->color_sky = tmp_color;
 				map->counter++;
+				return (0);
 			}
+			else
+				return (1);
 		}
 	}
+	if (tmp[i] == '\n' || tmp[i] == '\0')
+		return (0);
+	write(2, "Error: Invalid parsing for texture or color\n", 45);
+	return (1);
 }

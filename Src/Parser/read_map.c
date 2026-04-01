@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:31:38 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/30 17:25:40 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 12:17:17 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	add_map_line(t_map *map, char *line)
 	}
 }
 
-void	read_map(t_map *map, char *filename)
+int	read_map(t_map *map, char *filename)
 {
 	char	*line;
 	int		fd;
@@ -63,6 +63,10 @@ void	read_map(t_map *map, char *filename)
 	map->counter = 0;
 	map->color_floor = -1;
 	map->color_sky = -1;
+	map->texture_north = NULL;
+	map->texture_south = NULL;
+	map->texture_west = NULL;
+	map->texture_east = NULL;
 	map->node_map = NULL;
 	map->map_width = 0;
 	map->map_height = 0;
@@ -71,7 +75,8 @@ void	read_map(t_map *map, char *filename)
 	{
 		if (map->counter < 6)
 		{
-			count_line_map(line, map);
+			if (count_line_map(line, map) == 1)
+				return (free(line), close(fd), 1);
 			free(line);
 		}
 		else if (map->counter == 6)
@@ -80,6 +85,7 @@ void	read_map(t_map *map, char *filename)
 	}
 	convert_map_to_tab_char(map);
 	close(fd);
+	return (0);
 }
 
 void	convert_map_to_tab_char(t_map *map)

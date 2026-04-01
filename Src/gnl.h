@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:45:45 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/30 17:26:03 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 12:17:35 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # endif
 
 # include "parser.h"
-#include <stddef.h>
 # include <fcntl.h>
+# include <stddef.h>
 # include <sys/stat.h>
 
 char	*ft_strjoin(char const *str1, char const *str2);

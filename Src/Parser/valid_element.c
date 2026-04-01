@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:53:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/30 17:25:43 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 12:23:31 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	store_map_info(char c, t_map *map, int x, int y)
 
 bool	scan_map_elements(char **map_coordinates, t_map *map)
 {
-	int y;
-	int x;
-	char c;
+	int		y;
+	int		x;
+	char	c;
 
 	y = 0;
 	while (y < map->map_height)
