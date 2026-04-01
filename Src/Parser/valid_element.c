@@ -6,11 +6,12 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:53:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/01 12:23:31 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 15:28:46 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
+#include <unistd.h>
 
 void	store_map_info(char c, t_map *map, int x, int y)
 {
@@ -23,7 +24,7 @@ void	store_map_info(char c, t_map *map, int x, int y)
 	}
 }
 
-bool	scan_map_elements(char **map_coordinates, t_map *map)
+int	scan_map_elements(char **map_coordinates, t_map *map)
 {
 	int		y;
 	int		x;
@@ -40,12 +41,12 @@ bool	scan_map_elements(char **map_coordinates, t_map *map)
 				&& c != ' ' && c != 'E' && c != '\n' && c != '\r')
 			{
 				write(2, "Parsing error.\n", 16);
-				return (false);
+				return (1);
 			}
 			store_map_info(c, map, x, y);
 			x++;
 		}
 		y++;
 	}
-	return (true);
+	return (0);
 }

@@ -6,11 +6,12 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:31:18 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/30 17:26:15 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 15:30:16 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../gnl.h"
+#include <stdlib.h>
 
 char	*ft_strjoin(char const *str1, char const *str2)
 {

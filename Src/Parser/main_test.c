@@ -6,11 +6,14 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 17:05:15 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/01 12:20:45 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 19:20:21 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int	main(int argc, char **argv)
 {
@@ -22,6 +25,8 @@ int	main(int argc, char **argv)
 		printf("Erreur\nVeuillez fournir une carte (.cub) en argument.\n");
 		return (1);
 	}
+	if (valid_extension(argv[1]) == 1)
+		return ((write(2, "Error: Bad extension\n", 21)), 1);
 	if (read_map(&my_map, argv[1]) == 1)
 	{
 		if (my_map.texture_north != NULL)

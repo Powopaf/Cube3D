@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:42:06 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/01 12:22:09 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 19:18:39 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 # define PARSER_H
 
 # include "gnl.h"
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
 
 typedef struct s_node_map
 {
@@ -54,9 +49,16 @@ typedef struct s_map
 int						extract_color(char *tmp, int i);
 char					*extract_path_texture(char *tmp, int i);
 int						count_line_map(char *tmp, t_map *map);
+void					init_data(t_map *map);
 int						read_map(t_map *map, char *filename);
-void					add_map_line(t_map *map, char *line);
+int						add_map_line(t_map *map, char *line);
+void					add_node_map(t_map *map, char *new_line);
 void					convert_map_to_tab_char(t_map *map);
 char					*pad_map_line(t_node_map *current, t_map *map);
+int						atoi_color(int color, int *i, char *tmp);
+int						parse_colors(char *tmp, int *i, t_map *map);
+int						parse_texture(char *tmp, int *i, t_map *map);
+void					add_node_map(t_map *map, char *new_line);
+int						valid_extension(char *filename);
 
 #endif

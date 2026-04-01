@@ -6,60 +6,19 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:31:38 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/01 12:17:17 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 19:16:45 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../gnl.h"
 #include "../parser.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-void	add_map_line(t_map *map, char *line)
+void	init_data(t_map *map)
 {
-	int			len;
-	char		*new_line;
-	t_node_map	*new_node;
-	t_node_map	*current;
-
-	if (!line)
-		return ;
-	len = 0;
-	while (line[len] && line[len] != '\n')
-		len++;
-	if (len == 0)
-	{
-		free(line);
-		return ;
-	}
-	new_line = ft_substr(line, 0, len);
-	if (map->map_width < len)
-		map->map_width = len;
-	map->map_height++;
-	free(line);
-	new_node = malloc(sizeof(t_node_map));
-	if (!new_node)
-	{
-		free(new_line);
-		return ;
-	}
-	new_node->read_line = new_line;
-	new_node->next = NULL;
-	if (map->node_map == NULL)
-		map->node_map = new_node;
-	else
-	{
-		current = map->node_map;
-		while (current->next != NULL)
-			current = current->next;
-		current->next = new_node;
-	}
-}
-
-int	read_map(t_map *map, char *filename)
-{
-	char	*line;
-	int		fd;
-
-	fd = open(filename, O_RDONLY);
 	map->counter = 0;
 	map->color_floor = -1;
 	map->color_sky = -1;
@@ -70,6 +29,15 @@ int	read_map(t_map *map, char *filename)
 	map->node_map = NULL;
 	map->map_width = 0;
 	map->map_height = 0;
+}
+
+int	read_map(t_map *map, char *filename)
+{
+	char	*line;
+	int		fd;
+
+	fd = open(filename, O_RDONLY);
+	init_data(map);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -80,7 +48,8 @@ int	read_map(t_map *map, char *filename)
 			free(line);
 		}
 		else if (map->counter == 6)
-			add_map_line(map, line);
+			if (add_map_line(map, line) == 1)
+				return (free(line), close(fd), 1);
 		line = get_next_line(fd);
 	}
 	convert_map_to_tab_char(map);

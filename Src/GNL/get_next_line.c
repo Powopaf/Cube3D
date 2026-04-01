@@ -6,11 +6,15 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:31:21 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/03/30 17:26:22 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/01 18:48:58 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../gnl.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 char	*ft_strchr(const char *str, int c)
 {
