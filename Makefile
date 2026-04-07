@@ -1,20 +1,29 @@
 CC = cc
-CFLAGS =  -Wall -Wextra -Werror -MMD -MP -g -fsanitize=address
+CFLAGS =  -Wall -Wextra -Werror -g -fsanitize=address
 NAME = cub3D
 LIBS = -fsanitize=address
 
-SRC =
+SRC = Src/Parser/extract_path.c \
+	  Src/Parser/read_map.c \
+	  Src/Parser/valid_element.c \
+	  Src/Parser/valid_map.c \
+	  Src/Parser/utils_extract.c \
+	  Src/Parser/add_map.c \
+	  Src/Parser/main_test.c \
+	  Src/GNL/get_next_line_utils.c \
+	  Src/GNL/get_next_line.c \
+	  
 
-OBJ = $(addprefix .obj/,$(SRC:.cpp=.o))
-DEP = $(addprefix .obj/,$(SRC:.cpp=.d))
+OBJ = $(addprefix .obj/,$(SRC:.c=.o))
+DEP = $(addprefix .obj/,$(SRC:.c=.d))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) -o $(NAME) $+ $(LIBS)
 
-.obj/%.o: %.cpp
-	@mkdir -p .obj
+.obj/%.o: %.c
+	@mkdir -p $(dir $@) .obj
 	$(CC) $(CFLAGS) -c $< -o $@
 
 -include $(DEP)
