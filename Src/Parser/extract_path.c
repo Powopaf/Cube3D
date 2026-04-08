@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../gnl.h"
-#include "../parser.h"
+#include "GNL/gnl.h"
+#include "Parser/parser.h"
 #include <unistd.h>
 
 char	*extract_path_texture(char *tmp, int i)

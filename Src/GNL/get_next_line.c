@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../gnl.h"
+#include "GNL/gnl.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/stat.h>

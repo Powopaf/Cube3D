@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../gnl.h"
-#include "../parser.h"
+#include "GNL/gnl.h"
+#include "Parser/parser.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/stat.h>

@@ -13,32 +13,7 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "gnl.h"
-
-typedef struct s_node_map
-{
-	char				*read_line;
-	struct s_node_map	*next;
-}						t_node_map;
-typedef struct s_map
-{
-	int					map_height;
-	int					map_width;
-	char				**map;
-	t_node_map			*node_map;
-	int					color_floor;
-	int					color_sky;
-	int					player_count;
-	int					counter;
-	char				*texture_north;
-	char				*texture_south;
-	char				*texture_east;
-	char				*texture_west;
-	double				position_player_x;
-	double				position_player_y;
-	char				player_orientation;
-
-}						t_map;
+# include "struct.h"
 
 int						extract_color(char *tmp, int i);
 char					*extract_path_texture(char *tmp, int i);

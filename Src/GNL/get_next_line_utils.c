@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../gnl.h"
+#include "GNL/gnl.h"
 #include <stdlib.h>
 
 char	*ft_strjoin(char const *str1, char const *str2)

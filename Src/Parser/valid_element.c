@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parser.h"
+#include "Parser/parser.h"
 #include <unistd.h>
 
 void	store_map_info(char c, t_map *map, int x, int y)

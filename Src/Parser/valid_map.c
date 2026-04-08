@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parser.h"
+#include "GNL/gnl.h"
+#include "Parser/parser.h"
 
 int	valid_extension(char *filename)
 {

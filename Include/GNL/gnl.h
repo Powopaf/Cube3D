@@ -14,10 +14,10 @@
 # define GNL_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 4096
 # endif
 
-# include "parser.h"
+//# include "Parser/parser.h"
 # include <stddef.h>
 
 char	*ft_strjoin(char const *str1, char const *str2);
