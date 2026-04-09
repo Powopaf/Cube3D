@@ -25,6 +25,15 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
+typedef enum e_face
+{
+	FACE_UNKNOWN,
+	FACE_NORTH,
+	FACE_SOUTH,
+	FACE_EAST,
+	FACE_WEST
+} e_face;
+
 int run(t_map *map);
 
 #endif

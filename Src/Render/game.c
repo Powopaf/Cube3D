@@ -1,5 +1,7 @@
 #include "struct.h"
 #include "Render/game.h"
+#include "Error/error.h"
+#include "mlx.h"
 
 static int	init(t_map *map, t_p *p)
 {
@@ -19,6 +21,11 @@ static int	init(t_map *map, t_p *p)
 	return (0);
 }
 
+static int game_loop(t_map *map, t_p *p, t_data *img)
+{
+	return (0);
+}
+
 int run(t_map *map)
 {
 	void *mlx;
@@ -29,4 +36,15 @@ int run(t_map *map)
 	if (init(map, &p) == -1)
 		return (-1);
 	mlx = mlx_init();
+	if (!mlx)
+		return (print_error(ERROR_MLX_INIT));
+	win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
+	if (!win)
+		return (print_error(ERROR_WINDOW_INIT));
+	img.img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (!img.img)
+		return (print_error(ERROR_IMAGE_INIT));
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	if (!img.addr)
+		return (print_error(ERROR_IMAGE_INIT));
 }

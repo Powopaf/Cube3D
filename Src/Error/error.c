@@ -1,6 +1,8 @@
 #include "Error/error.h"
+#include <unistd.h>
 
-void print_error(const char *message)
+int print_error(const char *message)
 {
-	#
+	write(STDERR_FILENO, message, sizeof(message));
+	return (1);
 }

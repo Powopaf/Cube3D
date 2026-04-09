@@ -119,7 +119,7 @@ double ray_dist(t_cordinate p, double ray_angle, char **map, int *face)
 * -1 0 1
 *    P
 */
-void render(t_data *img, char **map, t_cordinate player_pos, double fov)
+void render(t_data *img, t_map map, t_cordinate player_pos, double fov)
 {
 	int i = 0;
 	double p_angle = -PI / 4.0; // keep previous player angle behavior
@@ -133,6 +133,7 @@ void render(t_data *img, char **map, t_cordinate player_pos, double fov)
 		double ray_len = ray_dist(player_pos, ray_angle, map, &wall_face); // calculate the distance from the player to the wall for the current ray
 		double perpdist = ray_len * cos(ray_angle - p_angle); // correct the distance for the fish-eye effect
 		if (perpdist < 0.0001)
+		
 			perpdist = 0.001; // prevent division by zero
 		int y_lo = (int)(SCREEN_HEIGHT / 2.0 - TILE_SIZE / 2.0 * projdist / perpdist); // calculate the top of the wall slice
 		int y_hi = (int)(SCREEN_HEIGHT / 2.0 + TILE_SIZE / 2.0 * projdist / perpdist); // calculate the bottom of the wall slice
