@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 19:13:17 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/01 19:17:48 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/09 11:29:21 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	add_map_line(t_map *map, char *line)
 		len++;
 	if (len == 0)
 	{
-		free(line);
 		if (map->map_height > 0)
 			return (1);
 		return (0);
@@ -59,8 +58,7 @@ int	add_map_line(t_map *map, char *line)
 	new_line = ft_substr(line, 0, len);
 	if (map->map_width < len)
 		map->map_width = len;
-	map->map_height++;
-	free(line);
 	add_node_map(map, new_line);
+	map->map_height++;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 17:05:15 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/07 17:24:20 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/09 13:41:42 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,24 @@ void	free_all_map(t_map *map)
 		free(map->texture_west);
 	if (map->texture_east != NULL)
 		free(map->texture_east);
+	if (map->node_map != NULL)
+		free_all_node(map);
+}
+
+void	free_all_node(t_map *map)
+{
+	t_node_map	*current;
+	t_node_map	*tmp;
+
+	current = map->node_map;
+	while (current != NULL)
+	{
+		free(current->read_line);
+		tmp = current->next;
+		free(current);
+		current = tmp;
+	}
+	map->node_map = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -58,7 +76,11 @@ int	main(int argc, char **argv)
 	if (valid_extension(argv[1]) == 1)
 		return ((write(2, "Error: Bad extension\n", 21)), 1);
 	if (read_map(&my_map, argv[1]) == 1)
+	{
+		printf("Erreur Parsing: sur read_map\n");
 		free_all_map(&my_map);
+		return (1);
+	}
 	printf("NO: %s\n", my_map.texture_north);
 	printf("SO: %s\n", my_map.texture_south);
 	printf("WE: %s\n", my_map.texture_west);
@@ -68,7 +90,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	if (scan_map_elements(my_map.map, &my_map) == 1)
 	{
-		printf("Erreur Parsing: Radar a échoué\n");
+		printf("Erreur Parsing: sur scan_map_elements\n");
 		free_all_map(&my_map);
 		return (1);
 	}
@@ -83,7 +105,7 @@ int	main(int argc, char **argv)
 	}
 	if (check_walls(my_map.map, &my_map) == 1)
 	{
-		printf("Erreur Parsing: La carte a une fuite\n");
+		printf("Erreur Parsing: sur check_walls\n");
 		free_all_map(&my_map);
 		return (1);
 	}
