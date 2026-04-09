@@ -23,6 +23,7 @@ typedef struct s_map
 {
 	int					map_height;
 	int					map_width;
+	int					tile_size;
 	char				**map;
 	t_node_map			*node_map;
 	int					color_floor;
