@@ -35,5 +35,6 @@ typedef enum e_face
 } e_face;
 
 int run(t_map *map);
+double	ray_dist(t_p p, double ray_angle, char **map, e_face *face);
 
 #endif

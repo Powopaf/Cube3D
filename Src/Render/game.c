@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
+/*   Updated: 2026/04/10 12:12:40 by pifourni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "struct.h"
 #include "Render/game.h"
 #include "Error/error.h"
@@ -21,7 +33,7 @@ static int	init(t_map *map, t_p *p)
 	return (0);
 }
 
-static int game_loop(t_map *map, t_p *p, t_data *img)
+static int	game_loop(t_map *map, t_p *p, t_data *img)
 {
 	return (0);
 }
