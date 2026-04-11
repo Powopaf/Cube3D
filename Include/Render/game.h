@@ -3,6 +3,7 @@
 
 #include "struct.h"
 
+#define STEP 0.01
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 #define PI 3.14159265358979323846
