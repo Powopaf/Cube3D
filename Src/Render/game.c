@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/10 12:12:40 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/13 13:23:30 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	init(t_map *map, t_p *p)
 	else if (map->player_orientation == 'W')
 		p->angle = PI;
 	else
-		return (-1); // invalid player orientation
+		return (-1);
 	return (0);
 }
 
