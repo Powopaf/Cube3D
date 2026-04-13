@@ -6,12 +6,12 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 13:23:30 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/13 13:44:44 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "struct.h"
-#include "Render/game.h"
+#include "Render/ray_casting.h"
 #include "Error/error.h"
 #include "mlx.h"
 
