@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/09 10:42:22 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 13:49:36 by pifourni         ###   ########.fr       */
+/*   Created: 2026/04/13 13:59:52 by pifourni          #+#    #+#             */
+/*   Updated: 2026/04/13 14:17:13 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Parser/parser.h"
+#ifndef KEY_H
+# define KEY_H
 
-int main(int argc, char **argv)
-{
-	t_map	map;
-	/*
-	* parsing function here
-	*/
-	/*
-	* run the game here
-	*/
-	return (0);
-}
+#include "struct.h"
+
+#define PI 3.14159265358979323846
+
+# define KEY_UP 65362
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_DOWN 65364
+# define KEY_ESC 65307
+
+void	key_press(int keycode, void *param);
+
+#endif

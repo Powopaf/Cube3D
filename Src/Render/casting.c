@@ -6,12 +6,12 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:13:58 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 13:23:09 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/13 13:56:46 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "struct.h"
-#include "Render/game.h"
+#include "Render/ray_casting.h"
 #include <math.h>
 
 static double	c_x(int i)

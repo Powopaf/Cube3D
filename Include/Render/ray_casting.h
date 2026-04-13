@@ -11,21 +11,6 @@
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
-typedef struct s_p
-{
-	double	x;
-	double	y;
-	double angle;
-} t_p;
-
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
-
 typedef enum e_face
 {
 	FACE_UNKNOWN,

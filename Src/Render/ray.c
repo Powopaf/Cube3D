@@ -6,11 +6,11 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:28:06 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/10 12:28:09 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/13 13:56:55 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Render/game.h"
+#include "Render/ray_casting.h"
 #include "struct.h"
 #include <math.h>
 

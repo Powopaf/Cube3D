@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:56:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/08 13:56:39 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:25:36 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,26 @@ typedef struct s_map
 	char				player_orientation;
 
 }						t_map;
+
+typedef struct s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	void	*mlx;
+	void	*win;
+}	t_data;
+
+typedef struct s_p
+{
+	double	x;
+	double	y;
+	double	angle;
+	int		speed;
+	char**	map;
+	int		tile_size;
+} t_p;
+
 
 #endif
