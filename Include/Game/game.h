@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/09 10:42:22 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 13:49:36 by pifourni         ###   ########.fr       */
+/*   Created: 2026/04/13 13:44:27 by pifourni          #+#    #+#             */
+/*   Updated: 2026/04/13 13:48:02 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Parser/parser.h"
+#ifndef GAME_H
+# define GAME_H
 
-int main(int argc, char **argv)
-{
-	t_map	map;
-	/*
-	* parsing function here
-	*/
-	/*
-	* run the game here
-	*/
-	return (0);
-}
+#include "struct.h"
+
+int	run(t_map *map);
+
+#endif
