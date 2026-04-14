@@ -6,12 +6,13 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:13:58 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 13:37:29 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 14:04:34 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "struct.h"
-#include "Render/ray_casting.h"
+#include "Render/casting.h"
+#include "Render/ray.h"
 #include <math.h>
 
 static double	c_x(int i)
@@ -64,7 +65,7 @@ static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
 		color = 0xFFFFFF;
 	draw_vertical_line(img, (int)dist[2], (int [2]){0, y_lo - 1}, 0xFF000F);
 	draw_vertical_line(img, (int)dist[2],
-		(int [2]){MAX(0, y_lo), MIN(SCREEN_HEIGHT - 1, y_hi)}, color);
+		(int [2]){max(0, y_lo), min(SCREEN_HEIGHT - 1, y_hi)}, color);
 	draw_vertical_line(img, (int)dist[2],
 		(int [2]){y_hi + 1, SCREEN_HEIGHT - 1}, 0xD000FF);
 }
@@ -80,8 +81,8 @@ void	render(t_data *img, t_map map, t_p p)
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
-		ray_angle = p.angle + atan(c_x(i) * tan(FOV / 2.0));
-		projdist = (SCREEN_WIDTH / 2.0) / tan(FOV / 2.0);
+		ray_angle = p.angle + atan(c_x(i) * tan(g_fov / 2.0));
+		projdist = (SCREEN_WIDTH / 2.0) / tan(g_fov / 2.0);
 		perpdist = ray_dist(p, ray_angle, map.map, &wall_face);
 		if (perpdist < 0.0001)
 			perpdist = 0.0001;

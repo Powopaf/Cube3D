@@ -6,12 +6,11 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:28:06 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 13:56:55 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:51:04 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Render/ray_casting.h"
-#include "struct.h"
+#include "Render/ray.h"
 #include <math.h>
 
 static double	move_ray(double *info[4], int map_xy[2], t_map map, t_p p)
