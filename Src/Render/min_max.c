@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   min_max.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 13:44:27 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 11:36:20 by pifourni         ###   ########.fr       */
+/*   Created: 2026/04/14 13:48:14 by pifourni          #+#    #+#             */
+/*   Updated: 2026/04/14 13:55:39 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#include "Render/casting.h"
 
-# include "struct.h"
+int	min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
 
-int	run(t_map *map);
-
-#endif
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}

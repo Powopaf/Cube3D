@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:45:07 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 14:27:00 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:32:25 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ static void	move_player(t_p *p, double angle_offset)
 	}
 }
 
-void	key_press(int keycode, t_p *p)
+void	key_press(int keycode, void *param)
 {
+	t_p	*p;
+
+	p = (t_p *)param;
 	if (keycode == KEY_DOWN)
 		move_player(p, p->angle);
 	else if (keycode == KEY_UP)
@@ -48,4 +51,14 @@ void	key_press(int keycode, t_p *p)
 		return ;
 	else
 		return ;
+}
+
+void	mouse_press(int x, int y, void *param)
+{
+	t_p		*p;
+	double	d_x;
+
+	p = (t_p *)param;
+	d_x = (double)x - (SCREEN_WIDTH / 2.0);
+	p->angle += d_x * SENSITIVITY;
 }

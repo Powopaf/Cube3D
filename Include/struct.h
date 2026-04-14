@@ -6,12 +6,15 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:56:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 14:25:36 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:03:58 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
 
 typedef struct s_node_map
 {
@@ -56,9 +59,8 @@ typedef struct s_p
 	double	y;
 	double	angle;
 	int		speed;
-	char**	map;
+	char	**map;
 	int		tile_size;
-} t_p;
-
+}	t_p;
 
 #endif
