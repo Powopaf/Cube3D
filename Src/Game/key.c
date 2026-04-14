@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:45:07 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 14:27:00 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 20:10:24 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game/key.h"
+#include "Game/window.h"
 #include <math.h>
 
 static void	move_player(t_p *p, double angle_offset)
@@ -33,7 +34,7 @@ static void	move_player(t_p *p, double angle_offset)
 	}
 }
 
-void	key_press(int keycode, t_p *p)
+int	key_press(int keycode, t_p *p)
 {
 	if (keycode == KEY_DOWN)
 		move_player(p, p->angle);
@@ -44,8 +45,6 @@ void	key_press(int keycode, t_p *p)
 	else if (keycode == KEY_RIGHT)
 		move_player(p, p->angle + PI / 2.0);
 	else if (keycode == KEY_ESC)
-		// exit the game here
-		return ;
-	else
-		return ;
+		close_window(p);
+	return (0);
 }

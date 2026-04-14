@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:44:27 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 13:48:02 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 20:13:02 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
-#include "struct.h"
+# include "struct.h"
 
 int	run(t_map *map);
 
