@@ -42,7 +42,7 @@ static double	move_ray(double *info[4], int map_xy[2], t_map map, t_p p)
 * info[3] = ray_y
 */
 
-static void	find_face(e_face *face, int map_xy[2], double info[4], int prev[2])
+static void	find_face(t_face *face, int map_xy[2], double info[4], int prev[2])
 {
 	if (map_xy[0] != prev[0])
 	{

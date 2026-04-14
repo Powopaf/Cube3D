@@ -6,16 +6,16 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:59:52 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 10:01:50 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 11:36:13 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_H
 # define KEY_H
 
-#include "struct.h"
+# include "struct.h"
 
-#define PI 3.14159265358979323846
+# define PI 3.14159265358979323846
 
 # define KEY_UP 65362
 # define KEY_LEFT 65361

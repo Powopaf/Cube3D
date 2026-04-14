@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 10:04:52 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 11:43:38 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static int	init(t_map *map, t_p *p)
 {
-	map->tile_size = min(SCREEN_WIDTH / map->map_width, SCREEN_HEIGHT / map->map_height);
+	map->tile_size = MIN(SCREEN_WIDTH / map->map_width, SCREEN_HEIGHT / map->map_height);
 	p->x = map->position_player_x * map->tile_size + map->tile_size / 2.0;
 	p->y = map->position_player_y * map->tile_size + map->tile_size / 2.0;
 	p->speed = map->tile_size / 10.0;

@@ -1,15 +1,27 @@
-#ifndef GAME_H
-# define GAME_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_casting.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/14 11:36:57 by pifourni          #+#    #+#             */
+/*   Updated: 2026/04/14 11:45:41 by pifourni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "struct.h"
+#ifndef RAY_CASTING_H
+# define RAY_CASTING_H
 
-#define STEP 0.01
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
-#define PI 3.14159265358979323846
-#define FOV (PI / 3.0)
-#define min(a, b) ((a) < (b) ? (a) : (b))
-#define max(a, b) ((a) > (b) ? (a) : (b))
+# include "struct.h"
+
+# define STEP 0.01
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
+# define PI 3.14159265358979323846
+# define FOV (PI / 3.0)
+# define MIN(a, b) ((a) < (b) ? (a) : (b))
+# define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 typedef enum e_face
 {
@@ -18,9 +30,9 @@ typedef enum e_face
 	FACE_SOUTH,
 	FACE_EAST,
 	FACE_WEST
-} e_face;
+}	t_face;
 
-int run(t_map *map);
-double	ray_dist(t_p p, double ray_angle, char **map, e_face *face);
+int		run(t_map *map);
+double	ray_dist(t_p p, double ray_angle, char **map, t_face *face);
 
 #endif

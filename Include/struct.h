@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:56:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 14:25:36 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 11:35:07 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ typedef struct s_p
 	double	y;
 	double	angle;
 	int		speed;
-	char**	map;
+	char	**map;
 	int		tile_size;
-} t_p;
-
+}	t_p;
 
 #endif

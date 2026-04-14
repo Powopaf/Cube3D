@@ -35,7 +35,7 @@ static void draw_vertical_line(t_data *img, int x, int start, int end, int color
 	}
 }
 
-static void	draw(t_data *img, double dist[3], e_face wallface, t_map map)
+static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
 {
 	int	y_lo;
 	int	y_hi;
@@ -55,7 +55,7 @@ static void	draw(t_data *img, double dist[3], e_face wallface, t_map map)
 	else 
 		color = 0xFFFFFF;
 	draw_vertical_line(img, (int)dist[2], 0, y_lo - 1, 0xFF000F);
-	draw_vertical_line(img, (int)dist[2], max(0, y_lo), min(SCREEN_HEIGHT - 1, y_hi), color);
+	draw_vertical_line(img, (int)dist[2], MAX(0, y_lo), MIN(SCREEN_HEIGHT - 1, y_hi), color);
 	draw_vertical_line(img, (int)dist[2], y_hi + 1, SCREEN_HEIGHT - 1, 0xD000FF);
 }
 	
@@ -63,7 +63,7 @@ static void	draw(t_data *img, double dist[3], e_face wallface, t_map map)
 void	render(t_data *img, t_map map, t_p p)
 {
 	int		i;
-	e_face	wall_face;
+	t_face	wall_face;
 	double	ray_angle;
 	double	projdist;
 	double	perpdist;
