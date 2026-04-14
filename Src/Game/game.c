@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 11:43:38 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:05:40 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	init(t_map *map, t_p *p)
 static void	game_loop(t_map *map, t_p *p, t_data *img)
 {
 	render(img, *map, *p);
+	mlx_mouse_move(img->mlx, img->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 	mlx_hooks(img->win, 6, 1L << 6, mouse_press, p);
 	mlx_hooks(img->win, 2, 1L << 0, key_press, p);
@@ -66,6 +67,7 @@ int run(t_map *map)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	if (!img.addr)
 		return (print_error(ERROR_IMAGE_INIT));
+	mlx_mouse_hide(img.mlx, img.win);
 	game_loop(map, &p, &img);
 	return (0);
 }

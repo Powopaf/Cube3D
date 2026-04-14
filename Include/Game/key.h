@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:59:52 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 11:36:13 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:00:39 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "struct.h"
 
 # define PI 3.14159265358979323846
+# define SENSITIVITY 0.005
 
 # define KEY_UP 65362
 # define KEY_LEFT 65361

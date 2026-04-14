@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:36:57 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 11:45:41 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:03:30 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "struct.h"
 
 # define STEP 0.01
-# define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 600
 # define PI 3.14159265358979323846
 # define FOV (PI / 3.0)
 # define MIN(a, b) ((a) < (b) ? (a) : (b))
