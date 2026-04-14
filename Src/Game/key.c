@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:45:07 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 13:04:24 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:32:25 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	key_press(int keycode, void *param)
 
 void	mouse_press(int x, int y, void *param)
 {
-	t_p	*p;
+	t_p		*p;
 	double	d_x;
 
 	p = (t_p *)param;

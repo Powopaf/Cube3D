@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 13:05:40 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:32:13 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 
 static int	init(t_map *map, t_p *p)
 {
-	map->tile_size = MIN(SCREEN_WIDTH / map->map_width, SCREEN_HEIGHT / map->map_height);
+	map->tile_size = MIN(SCREEN_WIDTH / map->map_width,
+			SCREEN_HEIGHT / map->map_height);
 	p->x = map->position_player_x * map->tile_size + map->tile_size / 2.0;
 	p->y = map->position_player_y * map->tile_size + map->tile_size / 2.0;
 	p->speed = map->tile_size / 10.0;
@@ -48,10 +49,10 @@ static void	game_loop(t_map *map, t_p *p, t_data *img)
 	mlx_loop(img->mlx);
 }
 
-int run(t_map *map)
+int	run(t_map *map)
 {
-	t_data img;
-	t_p p;
+	t_data	img;
+	t_p		p;
 
 	if (init(map, &p) == -1)
 		return (-1);
@@ -64,7 +65,8 @@ int run(t_map *map)
 	img.img = mlx_new_image(img.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!img.img)
 		return (print_error(ERROR_IMAGE_INIT));
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
 	if (!img.addr)
 		return (print_error(ERROR_IMAGE_INIT));
 	mlx_mouse_hide(img.mlx, img.win);
