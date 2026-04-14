@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:59:52 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 14:17:13 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:01:50 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 # define KEY_ESC 65307
 
 void	key_press(int keycode, void *param);
+void	mouse_press(int x, int y, void *param);
 
 #endif

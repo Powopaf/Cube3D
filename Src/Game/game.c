@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/13 14:26:47 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:04:52 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	game_loop(t_map *map, t_p *p, t_data *img)
 {
 	render(img, *map, *p);
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	mlx_hooks(img->win, 6, 1L << 6, mouse_press, p);
 	mlx_hooks(img->win, 2, 1L << 0, key_press, p);
 	mlx_loop(img->mlx);
 }
