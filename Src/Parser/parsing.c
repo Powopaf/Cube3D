@@ -83,6 +83,6 @@ int	parsing(t_map *map, char **av, int ac)
 	if (check_walls(map->map, map) == 1)
 		return ((write(2, "Error: Problem with the walls\n", 30)),
 			free_all_map(map), 1);
-	free_all_map(map);
+	//free_all_map(map);
 	return (0);
 }

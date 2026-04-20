@@ -32,7 +32,7 @@ static t_mlx_hook_fn	to_mlx_hook_fn(t_mouse_motion_fn fn)
 	return (u.mlx);
 }
 
-static int	init(t_map *map, t_p *p)
+static int	init(t_map *map, t_p *p, t_data *img)
 {
 	map->tile_size = min(SCREEN_WIDTH / map->map_width, SCREEN_HEIGHT
 			/ map->map_height);
@@ -41,6 +41,8 @@ static int	init(t_map *map, t_p *p)
 	p->speed = map->tile_size / 10.0;
 	p->map = map->map;
 	p->tile_size = map->tile_size;
+	p->map_struct = map;
+	p->data_struct = img;
 	if (map->player_orientation == 'N')
 		p->angle = -PI / 2.0;
 	else if (map->player_orientation == 'S')
@@ -69,7 +71,7 @@ int	run(t_map *map)
 	t_data	img;
 	t_p		p;
 
-	if (init(map, &p) == -1)
+	if (init(map, &p, &img) == -1)
 		return (-1);
 	img.mlx = mlx_init();
 	if (!img.mlx)
@@ -84,7 +86,7 @@ int	run(t_map *map)
 			&img.endian);
 	if (!img.addr)
 		return (print_error(ERROR_IMAGE_INIT));
-	mlx_mouse_hide(img.mlx, img.win);
+	//mlx_mouse_hide(img.mlx, img.win); //leaks https://github.com/42paris/minilibx-linux/issues/48
 	game_loop(map, &p, &img);
 	return (0);
 }
