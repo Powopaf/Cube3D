@@ -17,6 +17,21 @@
 #include "minilibx-linux/mlx.h"
 #include "struct.h"
 
+typedef int	(*t_mlx_hook_fn)();
+typedef int	(*t_mouse_motion_fn)(int, int, void *);
+
+static t_mlx_hook_fn	to_mlx_hook_fn(t_mouse_motion_fn fn)
+{
+	union u_hook
+	{
+		t_mouse_motion_fn	motion;
+		t_mlx_hook_fn		mlx;
+	} u;
+
+	u.motion = fn;
+	return (u.mlx);
+}
+
 static int	init(t_map *map, t_p *p)
 {
 	map->tile_size = min(SCREEN_WIDTH / map->map_width, SCREEN_HEIGHT
@@ -44,8 +59,8 @@ static void	game_loop(t_map *map, t_p *p, t_data *img)
 	render(img, *map, *p);
 	mlx_mouse_move(img->mlx, img->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
-	mlx_hook(img->win, 6, 1L << 6, mouse_press, p);
-	mlx_hook(img->win, 2, 1L << 0, key_press, p);
+	mlx_hook(img->win, 6, 1L << 6, to_mlx_hook_fn(mouse_press), p);
+	mlx_key_hook(img->win, key_press, p);
 	mlx_loop(img->mlx);
 }
 

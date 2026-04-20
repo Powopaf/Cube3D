@@ -41,6 +41,7 @@ $(NAME): $(MLX) $(OBJ)
 
 clean:
 	rm -rf .obj
+	make -C ./minilibx-linux clean
 
 fclean: clean
 	rm -f $(NAME)
