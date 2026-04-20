@@ -16,7 +16,7 @@
 # include "struct.h"
 
 # define PI 3.14159265358979323846
-
+# define SENSITIVITY 0.005
 # define KEY_UP 65362
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -24,5 +24,6 @@
 # define KEY_ESC 65307
 
 int	key_press(int keycode, void *param);
+void	mouse_press(int x, int y, void *param);
 
 #endif

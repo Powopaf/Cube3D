@@ -13,6 +13,9 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
+
 typedef struct s_node_map
 {
 	char				*read_line;

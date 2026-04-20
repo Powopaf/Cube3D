@@ -6,12 +6,11 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:13:58 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 20:11:04 by sbrochar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Render/ray_casting.h"
 #include "struct.h"
+#include "struct.h"
+#include "Render/casting.h"
+#include "Render/ray.h"
 #include <math.h>
 
 static double	c_x(int i)
@@ -30,13 +29,19 @@ static void	pixel(t_data *data, int x, int y, int color)
 static void	draw_vertical_line(t_data *img, int x, int start, int end,
 		int color)
 {
-	for (int y = start; y < end; y++)
+	int	start;
+	int	end;
+
+	start = y_range[0];
+	end = y_range[1];
+	while (start <= end)
 	{
-		pixel(img, x, y, color);
+		pixel(img, x, start, color);
+		start++;
 	}
 }
 
-static void	draw(t_data *img, double dist[3], e_face wallface, t_map map)
+static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
 {
 	int	y_lo;
 	int	y_hi;
@@ -67,7 +72,7 @@ static void	draw(t_data *img, double dist[3], e_face wallface, t_map map)
 void	render(t_data *img, t_map map, t_p p)
 {
 	int		i;
-	e_face	wall_face;
+	t_face	wall_face;
 	double	ray_angle;
 	double	projdist;
 	double	perpdist;
@@ -75,8 +80,8 @@ void	render(t_data *img, t_map map, t_p p)
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
-		ray_angle = p.angle + atan(c_x(i) * tan(FOV / 2.0));
-		projdist = (SCREEN_WIDTH / 2.0) / tan(FOV / 2.0);
+		ray_angle = p.angle + atan(c_x(i) * tan(g_fov / 2.0));
+		projdist = (SCREEN_WIDTH / 2.0) / tan(g_fov / 2.0);
 		perpdist = ray_dist(p, ray_angle, map.map, &wall_face);
 		if (perpdist < 0.0001)
 			perpdist = 0.0001;

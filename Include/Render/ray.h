@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 11:35:27 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 11:35:42 by pifourni         ###   ########.fr       */
+/*   Created: 2026/04/14 13:46:46 by pifourni          #+#    #+#             */
+/*   Updated: 2026/04/14 14:05:01 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef RAY_H
+# define RAY_H
 
-# define ERROR_MLX_INIT "Error: Failed to initialize MLX."
-# define ERROR_WINDOW_INIT "Error: Failed to create a window."
-# define ERROR_IMAGE_INIT "Error: Failed to create an image."
+# include "struct.h"
 
-int	print_error(const char *message);
+# define STEP 0.01
+# define PI 3.14159265358979323846
+
+static const double	g_fov = PI / 3.0;
+
+typedef enum e_face
+{
+	FACE_UNKNOWN,
+	FACE_NORTH,
+	FACE_SOUTH,
+	FACE_EAST,
+	FACE_WEST
+}	t_face;
+
+double	ray_dist(t_p p, double ray_angle, char **map, t_face *face);
 
 #endif

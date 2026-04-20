@@ -36,6 +36,9 @@ static void	move_player(t_p *p, double angle_offset)
 
 int	key_press(int keycode, t_p *p)
 {
+	t_p	*p;
+
+	p = (t_p *)param;
 	if (keycode == KEY_DOWN)
 		move_player(p, p->angle);
 	else if (keycode == KEY_UP)
@@ -47,4 +50,14 @@ int	key_press(int keycode, t_p *p)
 	else if (keycode == KEY_ESC)
 		close_window(p);
 	return (0);
+}
+
+void	mouse_press(int x, int y, void *param)
+{
+	t_p		*p;
+	double	d_x;
+
+	p = (t_p *)param;
+	d_x = (double)x - (SCREEN_WIDTH / 2.0);
+	p->angle += d_x * SENSITIVITY;
 }

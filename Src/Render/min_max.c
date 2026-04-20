@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   min_max.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 11:35:27 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 11:35:42 by pifourni         ###   ########.fr       */
+/*   Created: 2026/04/14 13:48:14 by pifourni          #+#    #+#             */
+/*   Updated: 2026/04/14 13:55:39 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "Render/casting.h"
 
-# define ERROR_MLX_INIT "Error: Failed to initialize MLX."
-# define ERROR_WINDOW_INIT "Error: Failed to create a window."
-# define ERROR_IMAGE_INIT "Error: Failed to create an image."
+int	min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
 
-int	print_error(const char *message);
-
-#endif
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
