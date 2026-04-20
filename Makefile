@@ -1,7 +1,7 @@
 CC = cc
-CFLAGS = -I. -IInclude -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -I. -IInclude -Wall -Wextra -Werror -g
 NAME = cub3D
-LIBS = -fsanitize=address
+LIBS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd
 
 SRC = Src/Parser/extract_path.c \
 	  Src/Parser/read_map.c \
@@ -9,17 +9,28 @@ SRC = Src/Parser/extract_path.c \
 	  Src/Parser/valid_map.c \
 	  Src/Parser/utils_extract.c \
 	  Src/Parser/add_map.c \
-	  Src/Parser/main_test.c \
+	  Src/Parser/parsing.c \
 	  Src/GNL/get_next_line_utils.c \
 	  Src/GNL/get_next_line.c \
-	  
+	  Src/Render/casting.c \
+	  Src/Render/min_max.c \
+	  Src/Render/ray.c \
+	  Src/Error/error.c \
+	  Src/Game/game.c \
+	  Src/Game/key.c \
+	  Src/Window/exit_window.c \
+	  main.c
 
 OBJ = $(addprefix .obj/,$(SRC:.c=.o))
 DEP = $(addprefix .obj/,$(SRC:.c=.d))
+MLX = ./minilibx-linux/libmlx.a
 
-all: $(NAME)
+all: $(MLX) $(NAME)
 
-$(NAME): $(OBJ)
+$(MLX):
+	make -C ./minilibx-linux
+
+$(NAME): $(MLX) $(OBJ)
 	$(CC) -o $(NAME) $+ $(LIBS)
 
 .obj/%.o: %.c

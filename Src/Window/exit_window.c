@@ -6,12 +6,14 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 16:37:31 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/14 19:53:53 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:04:20 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Include/Parser/parser.h"
 #include "Include/struct.h"
+#include "minilibx-linux/mlx.h"
+#include <stdlib.h>
 
 void	exit_game(t_p *p)
 {

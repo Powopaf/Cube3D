@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:59:52 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 20:13:22 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:59:50 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 # define KEY_ESC 65307
 
 int	key_press(int keycode, void *param);
-void	mouse_press(int x, int y, void *param);
+int	mouse_press(int x, int y, void *param);
 
 #endif
