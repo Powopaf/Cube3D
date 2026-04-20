@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:45:07 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 20:10:24 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/20 15:03:12 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	move_player(t_p *p, double angle_offset)
 	}
 }
 
-int	key_press(int keycode, t_p *p)
+int	key_press(int keycode, void *param)
 {
 	t_p	*p;
 
@@ -52,12 +52,14 @@ int	key_press(int keycode, t_p *p)
 	return (0);
 }
 
-void	mouse_press(int x, int y, void *param)
+int	mouse_press(int x, int y, void *param)
 {
 	t_p		*p;
 	double	d_x;
 
+	(void)y;
 	p = (t_p *)param;
 	d_x = (double)x - (SCREEN_WIDTH / 2.0);
 	p->angle += d_x * SENSITIVITY;
+	return (0);
 }

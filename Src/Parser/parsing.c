@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 17:05:15 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/14 15:28:56 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:40:17 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	init_for_parsing(t_map *map)
 
 int	parsing(t_map *map, char **av, int ac)
 {
-	int	i;
-
 	init_for_parsing(map);
 	if (ac != 2)
 		return ((write(2, "Error: Wrong argument number\n", 29)), 1);
@@ -79,7 +77,6 @@ int	parsing(t_map *map, char **av, int ac)
 	if (read_map(map, av[1]) == 1)
 		return ((write(2, "Error: Map reading problem\n", 27)),
 			free_all_map(map), 1);
-	i = 0;
 	if (scan_map_elements(map->map, map) == 1)
 		return ((write(2, "Error: Bad element in map\n", 26)),
 			free_all_map(map), 1);

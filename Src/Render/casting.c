@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/10 12:13:58 by pifourni          #+#    #+#             */
-#include "Render/ray_casting.h"
-#include "struct.h"
-#include "struct.h"
+/*   Created: 2026/04/20 14:41:21 by sbrochar          #+#    #+#             */
+/*   Updated: 2026/04/20 14:50:36 by sbrochar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Render/casting.h"
 #include "Render/ray.h"
+#include "struct.h"
 #include <math.h>
 
 static double	c_x(int i)
@@ -26,8 +28,7 @@ static void	pixel(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-static void	draw_vertical_line(t_data *img, int x, int start, int end,
-		int color)
+static void	draw_vertical_line(t_data *img, int x, int y_range[2], int color)
 {
 	int	start;
 	int	end;
@@ -62,10 +63,10 @@ static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
 		color = 0xFFFF00;
 	else
 		color = 0xFFFFFF;
-	draw_vertical_line(img, (int)dist[2], 0, y_lo - 1, 0xFF000F);
-	draw_vertical_line(img, (int)dist[2], max(0, y_lo), min(SCREEN_HEIGHT - 1,
-			y_hi), color);
-	draw_vertical_line(img, (int)dist[2], y_hi + 1, SCREEN_HEIGHT - 1,
+	draw_vertical_line(img, (int)dist[2], (int[2]){0, y_lo - 1}, 0xFF000F);
+	draw_vertical_line(img, (int)dist[2], (int[2]){max(0, y_lo),
+		min(SCREEN_HEIGHT - 1, y_hi)}, color);
+	draw_vertical_line(img, (int)dist[2], (int[2]){y_hi + 1, SCREEN_HEIGHT - 1},
 		0xD000FF);
 }
 
@@ -82,7 +83,7 @@ void	render(t_data *img, t_map map, t_p p)
 	{
 		ray_angle = p.angle + atan(c_x(i) * tan(g_fov / 2.0));
 		projdist = (SCREEN_WIDTH / 2.0) / tan(g_fov / 2.0);
-		perpdist = ray_dist(p, ray_angle, map.map, &wall_face);
+		perpdist = ray_dist(p, ray_angle, map, &wall_face);
 		if (perpdist < 0.0001)
 			perpdist = 0.0001;
 		draw(img, (double[3]){perpdist, projdist, (double)i}, wall_face, map);
