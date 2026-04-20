@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:56:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 13:03:58 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/04/14 20:11:44 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,27 @@ typedef struct s_map
 
 }						t_map;
 
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	void	*mlx;
-	void	*win;
-}	t_data;
+typedef struct s_data
+{
+	void				*img;
+	char				*addr;
+	int					bits_per_pixel;
+	int					line_length;
+	int					endian;
+	void				*mlx;
+	void				*win;
+}						t_data;
 
 typedef struct s_p
 {
-	double	x;
-	double	y;
-	double	angle;
-	int		speed;
-	char	**map;
-	int		tile_size;
-}	t_p;
+	double				x;
+	double				y;
+	double				angle;
+	int					speed;
+	char				**map;
+	int					tile_size;
+	t_map				*map_struct;
+	t_data				*data_struct;
+}						t_p;
 
 #endif

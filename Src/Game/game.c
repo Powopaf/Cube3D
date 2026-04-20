@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
 /*   Updated: 2026/04/14 13:53:57 by pifourni         ###   ########.fr       */
@@ -13,9 +13,11 @@
 #include "struct.h"
 #include "Render/casting.h"
 #include "Error/error.h"
-#include "mlx.h"
-#include "Game/key.h"
 #include "Game/game.h"
+#include "Game/key.h"
+#include "Render/ray_casting.h"
+#include "mlx.h"
+#include "struct.h"
 
 static int	init(t_map *map, t_p *p)
 {
