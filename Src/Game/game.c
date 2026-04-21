@@ -43,11 +43,11 @@ static int	init(t_map *map, t_p *p, t_data *img)
 
 static void	game_loop(t_p *p, t_data *img)
 {
-	render(p);
 	mlx_mouse_move(img->mlx, img->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	//mlx_hook(img->win, 6, 1L << 6, to_mlx_hook_fn(mouse_press), p);
-	mlx_key_hook(img->win, key_press, p);
-	mlx_loop_hook(img->mlx, render, p);
+	mlx_hook(img->win, 2, 1L << 0, key_press, p);
+	mlx_hook(img->win, 3, 1L << 1, key_release, p);
+	mlx_loop_hook(img->mlx, key_loop, p);
 	mlx_loop(img->mlx);
 }
 

@@ -16,6 +16,11 @@
 #include "minilibx-linux/mlx.h"
 #include <math.h>
 
+static int	g_up;
+static int	g_down;
+static int	g_left;
+static int	g_right;
+
 static void	move_player(t_p *p, double angle_offset)
 {
 	double	old_x;
@@ -42,15 +47,48 @@ int	key_press(int keycode, void *param)
 
 	p = (t_p *)param;
 	if (keycode == KEY_UP)
-		move_player(p, p->angle);
+		g_up = 1;
 	else if (keycode == KEY_DOWN)
-		move_player(p, p->angle + PI);
+		g_down = 1;
 	else if (keycode == KEY_LEFT)
-		move_player(p, p->angle - PI / 2.0);
+		g_left = 1;
 	else if (keycode == KEY_RIGHT)
-		move_player(p, p->angle + PI / 2.0);
+		g_right = 1;
 	else if (keycode == KEY_ESC)
 		close_window(p);
+	return (0);
+}
+
+int	key_release(int keycode, void *param)
+{
+	(void)param;
+	if (keycode == KEY_UP)
+		g_up = 0;
+	else if (keycode == KEY_DOWN)
+		g_down = 0;
+	else if (keycode == KEY_LEFT)
+		g_left = 0;
+	else if (keycode == KEY_RIGHT)
+		g_right = 0;
+	return (0);
+}
+
+int	key_loop(void *param)
+{
+	t_p	*p;
+
+	p = (t_p *)param;
+	if (g_up)
+		move_player(p, p->angle);
+	if (g_down)
+		move_player(p, p->angle + PI);
+	if (g_left)
+		move_player(p, p->angle - PI / 2.0);
+	if (g_right)
+		move_player(p, p->angle + PI / 2.0);
+	render(p);
+	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win,
+		p->data_struct->img, 0, 0);
 	return (0);
 }
 
