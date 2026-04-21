@@ -86,7 +86,8 @@ int	render(void *param)
 	{
 		ray_angle = p->angle + atan(c_x(i) * tan(g_fov / 2.0));
 		projdist = (SCREEN_WIDTH / 2.0) / tan(g_fov / 2.0);
-		perpdist = ray_dist(*p, ray_angle, *p->map_struct, &wall_face);
+		perpdist = ray_dist(*p, ray_angle, *p->map_struct, &wall_face)
+			* cos(ray_angle - p->angle);
 		if (perpdist < 0.0001)
 			perpdist = 0.0001;
 		draw(p->data_struct, (double[3]){perpdist, projdist, (double)i}, wall_face, *p->map_struct);
