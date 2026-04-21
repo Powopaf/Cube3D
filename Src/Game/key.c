@@ -12,6 +12,8 @@
 
 #include "Game/key.h"
 #include "Game/window.h"
+#include "Render/casting.h"
+#include "minilibx-linux/mlx.h"
 #include <math.h>
 
 static void	move_player(t_p *p, double angle_offset)
@@ -32,6 +34,8 @@ static void	move_player(t_p *p, double angle_offset)
 		p->x = old_x;
 		p->y = old_y;
 	}
+	render(p->data_struct, *p->map_struct, *p);
+	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win, p->data_struct->img, 0, 0);
 }
 
 int	key_press(int keycode, void *param)
@@ -39,9 +43,9 @@ int	key_press(int keycode, void *param)
 	t_p	*p;
 
 	p = (t_p *)param;
-	if (keycode == KEY_DOWN)
+	if (keycode == KEY_UP)
 		move_player(p, p->angle);
-	else if (keycode == KEY_UP)
+	else if (keycode == KEY_DOWN)
 		move_player(p, p->angle + PI);
 	else if (keycode == KEY_LEFT)
 		move_player(p, p->angle - PI / 2.0);

@@ -15,7 +15,7 @@
 #include "minilibx-linux/mlx.h"
 #include <stdlib.h>
 
-void	exit_game(t_p *p)
+static void	exit_game(t_p *p)
 {
 	mlx_destroy_window(p->data_struct->mlx, p->data_struct->win);
 	mlx_destroy_image(p->data_struct->mlx, p->data_struct->img);

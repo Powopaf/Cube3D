@@ -1,7 +1,7 @@
 CC = cc
-CFLAGS = -I. -IInclude -Wall -Wextra -Werror -g
+CFLAGS = -I. -IInclude -Wall -Wextra -Werror -g -fsanitize=address
 NAME = cub3D
-LIBS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd
+LIBS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd -fsanitize=address
 
 SRC = Src/Parser/extract_path.c \
 	  Src/Parser/read_map.c \
