@@ -13,6 +13,7 @@
 #include "Render/casting.h"
 #include "Render/ray.h"
 #include "struct.h"
+#include "minilibx-linux/mlx.h"
 #include <math.h>
 
 static double	c_x(int i)
@@ -70,23 +71,27 @@ static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
 		0xD000FF);
 }
 
-void	render(t_data *img, t_map map, t_p p)
+int	render(void *param)
 {
+	t_p		*p;
 	int		i;
 	t_face	wall_face;
 	double	ray_angle;
 	double	projdist;
 	double	perpdist;
 
+	p = (t_p *)param;
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
-		ray_angle = p.angle + atan(c_x(i) * tan(g_fov / 2.0));
+		ray_angle = p->angle + atan(c_x(i) * tan(g_fov / 2.0));
 		projdist = (SCREEN_WIDTH / 2.0) / tan(g_fov / 2.0);
-		perpdist = ray_dist(p, ray_angle, map, &wall_face);
+		perpdist = ray_dist(*p, ray_angle, *p->map_struct, &wall_face);
 		if (perpdist < 0.0001)
 			perpdist = 0.0001;
-		draw(img, (double[3]){perpdist, projdist, (double)i}, wall_face, map);
+		draw(p->data_struct, (double[3]){perpdist, projdist, (double)i}, wall_face, *p->map_struct);
 		i++;
 	}
+	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win, p->data_struct->img, 0, 0);
+	return (0);
 }

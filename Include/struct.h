@@ -60,6 +60,10 @@ typedef struct s_p
 	double				y;
 	double				angle;
 	int					speed;
+	int				move_up;
+	int				move_down;
+	int				move_left;
+	int				move_right;
 	char				**map;
 	int					tile_size;
 	t_map				*map_struct;

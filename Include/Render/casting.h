@@ -15,7 +15,7 @@
 
 # include "struct.h"
 
-void	render(t_data *img, t_map map, t_p p);
+int		render(void *param);
 int		min(int a, int b);
 int		max(int a, int b);
 

@@ -34,8 +34,6 @@ static void	move_player(t_p *p, double angle_offset)
 		p->x = old_x;
 		p->y = old_y;
 	}
-	render(p->data_struct, *p->map_struct, *p);
-	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win, p->data_struct->img, 0, 0);
 }
 
 int	key_press(int keycode, void *param)

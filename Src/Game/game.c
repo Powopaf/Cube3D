@@ -41,13 +41,13 @@ static int	init(t_map *map, t_p *p, t_data *img)
 	return (0);
 }
 
-static void	game_loop(t_map *map, t_p *p, t_data *img)
+static void	game_loop(t_p *p, t_data *img)
 {
-	render(img, *map, *p);
+	render(p);
 	mlx_mouse_move(img->mlx, img->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 	//mlx_hook(img->win, 6, 1L << 6, to_mlx_hook_fn(mouse_press), p);
 	mlx_key_hook(img->win, key_press, p);
+	mlx_loop_hook(img->mlx, render, p);
 	mlx_loop(img->mlx);
 }
 
@@ -72,6 +72,6 @@ int	run(t_map *map)
 	if (!img.addr)
 		return (print_error(ERROR_IMAGE_INIT));
 	//mlx_mouse_hide(img.mlx, img.win); //leaks https://github.com/42paris/minilibx-linux/issues/48
-	game_loop(map, &p, &img);
+	game_loop(&p, &img);
 	return (0);
 }
