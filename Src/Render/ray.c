@@ -79,7 +79,7 @@ double	ray_dist(t_p p, double ray_angle, t_map map, t_face *face)
 		dist = move_ray(info, map_xy, map, p);
 		if (dist >= 0)
 		{
-			find_face(face, map_xy, info, (int[2]){prev_map_x, prev_map_y});
+			find_face(face, map_xy, info, (int [2]){prev_map_x, prev_map_y});
 			return (dist);
 		}
 		prev_map_x = map_xy[0];

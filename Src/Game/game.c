@@ -17,7 +17,7 @@
 #include "minilibx-linux/mlx.h"
 #include "struct.h"
 
-static int	init(t_map *map, t_p *p)
+static int	init(t_map *map, t_p *p, t_data *img)
 {
 	map->tile_size = min(SCREEN_WIDTH / map->map_width, SCREEN_HEIGHT
 			/ map->map_height);
@@ -26,6 +26,8 @@ static int	init(t_map *map, t_p *p)
 	p->speed = map->tile_size / 10.0;
 	p->map = map->map;
 	p->tile_size = map->tile_size;
+	p->map_struct = map;
+	p->data_struct = img;
 	if (map->player_orientation == 'N')
 		p->angle = -PI / 2.0;
 	else if (map->player_orientation == 'S')
@@ -39,22 +41,26 @@ static int	init(t_map *map, t_p *p)
 	return (0);
 }
 
-static void	game_loop(t_map *map, t_p *p, t_data *img)
+static void	game_loop(t_p *p, t_data *img)
 {
-	render(img, *map, *p);
-	mlx_mouse_move(img->mlx, img->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 	mlx_hook(img->win, 6, 1L << 6, mouse_press, p);
 	mlx_hook(img->win, 2, 1L << 0, key_press, p);
+	mlx_hook(img->win, 3, 1L << 1, key_release, p);
+	mlx_loop_hook(img->mlx, key_loop, p);
 	mlx_loop(img->mlx);
 }
+
+/*
+* mlx_mouse_hide leak
+* link to issue: https://github.com/42paris/minilibx-linux/issues/48
+*/
 
 int	run(t_map *map)
 {
 	t_data	img;
 	t_p		p;
 
-	if (init(map, &p) == -1)
+	if (init(map, &p, &img) == -1)
 		return (-1);
 	img.mlx = mlx_init();
 	if (!img.mlx)
@@ -70,6 +76,6 @@ int	run(t_map *map)
 	if (!img.addr)
 		return (print_error(ERROR_IMAGE_INIT));
 	mlx_mouse_hide(img.mlx, img.win);
-	game_loop(map, &p, &img);
+	game_loop(&p, &img);
 	return (0);
 }

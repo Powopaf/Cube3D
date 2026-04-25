@@ -1,7 +1,7 @@
 CC = cc
-CFLAGS = -I. -IInclude -Wall -Wextra -Werror -g
+CFLAGS = -I. -IInclude -Wall -Wextra -Werror -MMD -MP -g -fsanitize=address
 NAME = cub3D
-LIBS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd
+LIBS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd -fsanitize=address
 
 SRC = Src/Parser/extract_path.c \
 	  Src/Parser/read_map.c \
@@ -18,6 +18,7 @@ SRC = Src/Parser/extract_path.c \
 	  Src/Error/error.c \
 	  Src/Game/game.c \
 	  Src/Game/key.c \
+	  Src/Game/key_helper.c \
 	  Src/Window/exit_window.c \
 	  main.c
 
@@ -41,6 +42,7 @@ $(NAME): $(MLX) $(OBJ)
 
 clean:
 	rm -rf .obj
+	make -C ./minilibx-linux clean
 
 fclean: clean
 	rm -f $(NAME)

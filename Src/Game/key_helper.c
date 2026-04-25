@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   casting.h                                          :+:      :+:    :+:   */
+/*   key_herper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 11:36:57 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 13:54:25 by pifourni         ###   ########.fr       */
+/*   Created: 2026/04/25 16:52:13 by pifourni          #+#    #+#             */
+/*   Updated: 2026/04/25 16:52:14 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CASTING_H
-# define CASTING_H
+#include "Game/key.h"
+#include <math.h>
 
-# include "struct.h"
-
-int		render(void *param);
-int		min(int a, int b);
-int		max(int a, int b);
-
-#endif
+double	normalize_angle(double angle)
+{
+	angle = fmod(angle, 2.0 * PI);
+	if (angle < 0.0)
+		angle += 2.0 * PI;
+	return (angle);
+}

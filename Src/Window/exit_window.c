@@ -15,16 +15,14 @@
 #include "minilibx-linux/mlx.h"
 #include <stdlib.h>
 
-void	exit_game(t_p *p)
+static void	exit_game(t_p *p)
 {
-	if (p->data_struct->win)
-		mlx_destroy_window(p->data_struct->mlx, p->data_struct->win);
-	if (p->data_struct->mlx)
-		mlx_destroy_display(p->data_struct->mlx);
-	if (p->data_struct->mlx)
-		free(p->data_struct->mlx);
-	if (p->map_struct->map)
-		free_all_map(p->map_struct);
+	mlx_destroy_window(p->data_struct->mlx, p->data_struct->win);
+	mlx_destroy_image(p->data_struct->mlx, p->data_struct->img);
+	mlx_loop_end(p->data_struct->mlx);
+	mlx_destroy_display(p->data_struct->mlx);
+	free(p->data_struct->mlx);
+	free_all_map(p->map_struct);
 	exit(0);
 }
 

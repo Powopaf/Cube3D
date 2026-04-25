@@ -15,10 +15,14 @@
 
 # include "struct.h"
 
-# define STEP 0.01
+# define STEP 0.045
 # define PI 3.14159265358979323846
 
-static const double	g_fov = PI / 3.0;
+/* 
+* FOV = PI / 3
+*/
+
+# define FOV 1.0471975511965976
 
 typedef enum e_face
 {

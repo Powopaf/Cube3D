@@ -15,7 +15,6 @@
 
 # include "struct.h"
 
-void	exit_game(t_p *p);
 int		close_window(t_p *p);
 
 #endif
