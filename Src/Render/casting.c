@@ -64,11 +64,12 @@ static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
 		color = 0xFFD166;
 	else
 		color = 0xFFFFFF;
-	draw_vertical_line(img, (int)dist[2], (int [2]){0, y_lo - 1}, 0xFFFFFF);
+	draw_vertical_line(img, (int)dist[2], (int [2]){0, y_lo - 1},
+		map.color_sky);
 	draw_vertical_line(img, (int)dist[2], (int [2]){max(0, y_lo),
 		min(SCREEN_HEIGHT - 1, y_hi)}, color);
 	draw_vertical_line(img, (int)dist[2],
-		(int [2]){y_hi + 1, SCREEN_HEIGHT - 1}, 0xFFFFFF);
+		(int [2]){y_hi + 1, SCREEN_HEIGHT - 1}, map.color_floor);
 }
 
 /* info[0] = perpdist
