@@ -21,6 +21,14 @@ static int	g_down;
 static int	g_left;
 static int	g_right;
 
+static double	normalize_angle(double angle)
+{
+	angle = fmod(angle, 2.0 * PI);
+	if (angle < 0.0)
+		angle += 2.0 * PI;
+	return (angle);
+}
+
 static void	move_player(t_p *p, double angle_offset)
 {
 	double	old_x;
@@ -34,7 +42,9 @@ static void	move_player(t_p *p, double angle_offset)
 	p->y += sin(angle_offset) * p->speed;
 	new_x = (int)(p->x / (double)p->tile_size);
 	new_y = (int)(p->y / (double)p->tile_size);
-	if (p->map[new_y][new_x] == '1')
+	if (new_x < 0 || new_y < 0 || new_x >= p->map_struct->map_width
+		|| new_y >= p->map_struct->map_height
+		|| p->map[new_y][new_x] == '1')
 	{
 		p->x = old_x;
 		p->y = old_y;
@@ -86,6 +96,7 @@ int	key_loop(void *param)
 		move_player(p, p->angle - PI / 2.0);
 	if (g_right)
 		move_player(p, p->angle + PI / 2.0);
+	p->angle = normalize_angle(p->angle);
 	render(p);
 	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win,
 		p->data_struct->img, 0, 0);
@@ -99,8 +110,10 @@ int	mouse_press(int x, int y, void *param)
 
 	(void)y;
 	p = (t_p *)param;
+	if (x == SCREEN_WIDTH / 2)
+		return (0);
 	d_x = (double)x - (SCREEN_WIDTH / 2.0);
-	p->angle += d_x * SENSITIVITY;
+	p->angle = normalize_angle(p->angle + d_x * SENSITIVITY);
 	mlx_mouse_move(p->data_struct->mlx, p->data_struct->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	return (0);
 }
