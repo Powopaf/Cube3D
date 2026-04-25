@@ -55,13 +55,13 @@ static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
 			* dist[1]);
 	color = 0xFFFFFF;
 	if (wallface == FACE_NORTH)
-		color = 0xFF0000;
+		color = 0xE63946;
 	else if (wallface == FACE_SOUTH)
-		color = 0x00FF00;
+		color = 0x06D6A0;
 	else if (wallface == FACE_EAST)
-		color = 0x0000FF;
+		color = 0x118AB2;
 	else if (wallface == FACE_WEST)
-		color = 0xFFFF00;
+		color = 0xFFD166;
 	else
 		color = 0xFFFFFF;
 	draw_vertical_line(img, (int)dist[2], (int[2]){0, y_lo - 1}, 0xFFFFFF);
