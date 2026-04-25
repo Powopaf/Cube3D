@@ -16,7 +16,7 @@
 # include "struct.h"
 
 # define PI 3.14159265358979323846
-# define SENSITIVITY 0.005
+# define SENSITIVITY 0.0001
 # define KEY_UP 65362
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363

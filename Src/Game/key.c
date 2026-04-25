@@ -101,5 +101,6 @@ int	mouse_press(int x, int y, void *param)
 	p = (t_p *)param;
 	d_x = (double)x - (SCREEN_WIDTH / 2.0);
 	p->angle += d_x * SENSITIVITY;
+	mlx_mouse_move(p->data_struct->mlx, p->data_struct->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	return (0);
 }

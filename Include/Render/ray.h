@@ -15,7 +15,7 @@
 
 # include "struct.h"
 
-# define STEP 0.1
+# define STEP 0.045
 # define PI 3.14159265358979323846
 
 static const double	g_fov = PI / 3.0;

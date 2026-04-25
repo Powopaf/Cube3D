@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -I. -IInclude -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -I. -IInclude -Wall -Wextra -Werror -MMD -MP -g -fsanitize=address
 NAME = cub3D
 LIBS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd -fsanitize=address
 
