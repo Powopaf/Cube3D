@@ -23,9 +23,10 @@
 # define KEY_DOWN 65364
 # define KEY_ESC 65307
 
-int	key_press(int keycode, void *param);
-int	key_release(int keycode, void *param);
-int	key_loop(void *param);
-int	mouse_press(int x, int y, void *param);
+int		key_press(int keycode, void *param);
+int		key_release(int keycode, void *param);
+int		key_loop(void *param);
+int		mouse_press(int x, int y, void *param);
+double	normalize_angle(double angle);
 
 #endif

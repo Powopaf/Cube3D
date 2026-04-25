@@ -21,14 +21,6 @@ static int	g_down;
 static int	g_left;
 static int	g_right;
 
-static double	normalize_angle(double angle)
-{
-	angle = fmod(angle, 2.0 * PI);
-	if (angle < 0.0)
-		angle += 2.0 * PI;
-	return (angle);
-}
-
 static void	move_player(t_p *p, double angle_offset)
 {
 	double	old_x;
@@ -114,6 +106,7 @@ int	mouse_press(int x, int y, void *param)
 		return (0);
 	d_x = (double)x - (SCREEN_WIDTH / 2.0);
 	p->angle = normalize_angle(p->angle + d_x * SENSITIVITY);
-	mlx_mouse_move(p->data_struct->mlx, p->data_struct->win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_mouse_move(p->data_struct->mlx, p->data_struct->win,
+		SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	return (0);
 }

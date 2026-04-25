@@ -64,12 +64,16 @@ static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
 		color = 0xFFD166;
 	else
 		color = 0xFFFFFF;
-	draw_vertical_line(img, (int)dist[2], (int[2]){0, y_lo - 1}, 0xFFFFFF);
-	draw_vertical_line(img, (int)dist[2], (int[2]){max(0, y_lo),
+	draw_vertical_line(img, (int)dist[2], (int [2]){0, y_lo - 1}, 0xFFFFFF);
+	draw_vertical_line(img, (int)dist[2], (int [2]){max(0, y_lo),
 		min(SCREEN_HEIGHT - 1, y_hi)}, color);
-	draw_vertical_line(img, (int)dist[2], (int[2]){y_hi + 1, SCREEN_HEIGHT - 1},
-		0xFFFFFF);
+	draw_vertical_line(img, (int)dist[2],
+		(int [2]){y_hi + 1, SCREEN_HEIGHT - 1}, 0xFFFFFF);
 }
+
+/* info[0] = perpdist
+*  info[1] = projdist
+*/
 
 int	render(void *param)
 {
@@ -77,22 +81,23 @@ int	render(void *param)
 	int		i;
 	t_face	wall_face;
 	double	ray_angle;
-	double	projdist;
-	double	perpdist;
+	double	info[2];
 
 	p = (t_p *)param;
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
-		ray_angle = p->angle + atan(c_x(i) * tan(g_fov / 2.0));
-		projdist = (SCREEN_WIDTH / 2.0) / tan(g_fov / 2.0);
-		perpdist = ray_dist(*p, ray_angle, *p->map_struct, &wall_face)
+		ray_angle = p->angle + atan(c_x(i) * tan(FOV / 2.0));
+		info[1] = (SCREEN_WIDTH / 2.0) / tan(FOV / 2.0);
+		info[0] = ray_dist(*p, ray_angle, *p->map_struct, &wall_face)
 			* cos(ray_angle - p->angle);
-		if (perpdist < 0.0001)
-			perpdist = 0.0001;
-		draw(p->data_struct, (double[3]){perpdist, projdist, (double)i}, wall_face, *p->map_struct);
+		if (info[0] < 0.0001)
+			info[0] = 0.0001;
+		draw(p->data_struct, (double [3]){info[0], info[1], (double)i},
+			wall_face, *p->map_struct);
 		i++;
 	}
-	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win, p->data_struct->img, 0, 0);
+	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win,
+		p->data_struct->img, 0, 0);
 	return (0);
 }

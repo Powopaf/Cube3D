@@ -18,6 +18,7 @@ SRC = Src/Parser/extract_path.c \
 	  Src/Error/error.c \
 	  Src/Game/game.c \
 	  Src/Game/key.c \
+	  Src/Game/key_helper.c \
 	  Src/Window/exit_window.c \
 	  main.c
 

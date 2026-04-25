@@ -50,6 +50,11 @@ static void	game_loop(t_p *p, t_data *img)
 	mlx_loop(img->mlx);
 }
 
+/*
+* mlx_mouse_hide leak
+* link to issue: https://github.com/42paris/minilibx-linux/issues/48
+*/
+
 int	run(t_map *map)
 {
 	t_data	img;
@@ -70,7 +75,7 @@ int	run(t_map *map)
 			&img.endian);
 	if (!img.addr)
 		return (print_error(ERROR_IMAGE_INIT));
-	mlx_mouse_hide(img.mlx, img.win); //leaks https://github.com/42paris/minilibx-linux/issues/48
+	mlx_mouse_hide(img.mlx, img.win);
 	game_loop(&p, &img);
 	return (0);
 }
