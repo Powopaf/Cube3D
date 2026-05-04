@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/20 14:59:27 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:45:46 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	run(t_map *map)
 			&img.endian);
 	if (!img.addr)
 		return (print_error(ERROR_IMAGE_INIT));
-	mlx_mouse_hide(img.mlx, img.win);
+	//mlx_mouse_hide(img.mlx, img.win);
 	game_loop(&p, &img);
 	return (0);
 }

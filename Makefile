@@ -1,7 +1,7 @@
 CC = cc
-CFLAGS = -I. -IInclude -Wall -Wextra -Werror -MMD -MP -g -fsanitize=address
+CFLAGS = -I. -IInclude -Wall -Wextra -Werror -MMD -MP -g -Wno-incompatible-pointer-types
 NAME = cub3D
-LIBS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd -fsanitize=address
+LIBS = -L./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd
 
 SRC = Src/Parser/extract_path.c \
 	  Src/Parser/read_map.c \
