@@ -58,13 +58,13 @@ static void	draw(t_p p, double dist[3], t_wall wall, t_map map)
 		draw_vertical_line(p.data_struct->img, (int)dist[2], (int [2]){max(0, y_lo),
 			min(SCREEN_HEIGHT - 1, y_hi)}, 0xFFFFFF);
 	if (wall.face == FACE_NORTH)
-		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[3], map.tile_size));
+		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[3], map.tile_size), wall.face);
 	else if (wall.face == FACE_SOUTH)
-		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[3], map.tile_size));
+		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[3], map.tile_size), wall.face);
 	else if (wall.face == FACE_EAST)
-		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[4], map.tile_size));
+		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[4], map.tile_size), wall.face);
 	else if (wall.face == FACE_WEST)
-		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[4], map.tile_size));
+		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[4], map.tile_size), wall.face);
 	else
 		draw_vertical_line(p.data_struct->img, (int)dist[2], (int [2]){max(0, y_lo),
 			min(SCREEN_HEIGHT - 1, y_hi)}, 0xFFFFFF);

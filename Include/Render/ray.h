@@ -27,10 +27,10 @@
 typedef enum e_face
 {
 	FACE_UNKNOWN,
-	FACE_NORTH,
-	FACE_SOUTH,
-	FACE_EAST,
-	FACE_WEST
+	FACE_NORTH = 0,
+	FACE_SOUTH = 1,
+	FACE_EAST = 2,
+	FACE_WEST = 3
 }					t_face;
 
 typedef struct s_wall
