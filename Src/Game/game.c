@@ -91,8 +91,6 @@ int	run(t_map *map)
 
 	if (init(map, &p, &img) == -1)
 		return (-1);
-	if (init_spite(map, &p) == -1)
-		return (-1);
 	img.mlx = mlx_init();
 	if (!img.mlx)
 		return (print_error(ERROR_MLX_INIT));
@@ -106,6 +104,8 @@ int	run(t_map *map)
 			&img.endian);
 	if (!img.addr)
 		return (print_error(ERROR_IMAGE_INIT));
+	if (init_spite(map, &p) == -1)
+		return (-1);
 	//mlx_mouse_hide(img.mlx, img.win);
 	game_loop(&p, &img);
 	return (0);

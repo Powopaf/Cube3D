@@ -54,22 +54,22 @@ static void	draw(t_p p, double dist[3], t_wall wall, t_map map)
 	y_hi = (int)(((double)SCREEN_HEIGHT / 2.0) + (map.tile_size / dist[0])
 			* dist[1]);
 	if (dist[0] == INFINITY)
-		draw_vertical_line(p.data_struct->img, (int)dist[2], (int [2]){max(0, y_lo),
+		draw_vertical_line(p.data_struct, (int)dist[2], (int [2]){max(0, y_lo),
 			min(SCREEN_HEIGHT - 1, y_hi)}, 0xFFFFFF);
 	if (wall.face == FACE_NORTH)
-		draw_sprite(p, (int [2]){(int)dist[3], (int)dist[4]}, fmod(dist[3], map.tile_size), wall.face, (double [2]){y_lo, y_hi});
+		draw_sprite(p, (double [2]){wall.wall_x, wall.wall_y}, (int [2]){wall.face, (int)dist[2]}, (double [2]){y_lo, y_hi});
 	else if (wall.face == FACE_SOUTH)
-		draw_sprite(p, (int [2]){(int)dist[3], (int)dist[4]}, fmod(dist[3], map.tile_size), wall.face, (double [2]){y_lo, y_hi});
+		draw_sprite(p, (double [2]){wall.wall_x, wall.wall_y}, (int [2]){wall.face, (int)dist[2]}, (double [2]){y_lo, y_hi});
 	else if (wall.face == FACE_EAST)
-		draw_sprite(p, (int [2]){(int)dist[3], (int)dist[4]}, fmod(dist[4], map.tile_size), wall.face, (double [2]){y_lo, y_hi});
+		draw_sprite(p, (double [2]){wall.wall_x, wall.wall_y}, (int [2]){wall.face, (int)dist[2]}, (double [2]){y_lo, y_hi});
 	else if (wall.face == FACE_WEST)
-		draw_sprite(p, (int [2]){(int)dist[3], (int)dist[4]}, fmod(dist[4], map.tile_size), wall.face, (double [2]){y_lo, y_hi});
+		draw_sprite(p, (double [2]){wall.wall_x, wall.wall_y}, (int [2]){wall.face, (int)dist[2]}, (double [2]){y_lo, y_hi});
 	else
-		draw_vertical_line(p.data_struct->img, (int)dist[2], (int [2]){max(0, y_lo),
+		draw_vertical_line(p.data_struct, (int)dist[2], (int [2]){max(0, y_lo),
 			min(SCREEN_HEIGHT - 1, y_hi)}, 0xFFFFFF);
-	draw_vertical_line(p.data_struct->img, (int)dist[2], (int [2]){0, y_lo - 1},
+	draw_vertical_line(p.data_struct, (int)dist[2], (int [2]){0, y_lo - 1},
 		map.color_sky);
-	draw_vertical_line(p.data_struct->img, (int)dist[2],
+	draw_vertical_line(p.data_struct, (int)dist[2],
 		(int [2]){y_hi + 1, SCREEN_HEIGHT - 1}, map.color_floor);
 }
 

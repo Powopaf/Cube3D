@@ -15,7 +15,7 @@
 
 # include "struct.h"
 
-# define STEP 0.045
+# define STEP 0.5
 # define PI 3.14159265358979323846
 
 /* 
@@ -35,10 +35,10 @@ typedef enum e_face
 
 typedef struct s_wall
 {
-	t_face				face;
-	int					wall_x;
-	int					wall_y;
-}						t_wall;
+	t_face	face;
+	double	wall_x;
+	double	wall_y;
+}	t_wall;
 
 double	ray_dist(t_p p, double ray_angle, t_map map, t_wall *wall);
 

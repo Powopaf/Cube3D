@@ -82,9 +82,9 @@ double	ray_dist(t_p p, double ray_angle, t_map map, t_wall *wall)
 		if (dist >= 0.0)
 		{
 			find_face(&wall->face, map_xy, info, (int [2]){prev_map_x, prev_map_y});
-			wall->wall_x = (int)info[2] / map.tile_size;
-			wall->wall_y = (int)info[3] / map.tile_size;			
-			return (dist);
+			wall->wall_x = info[2];
+			wall->wall_y = info[3];
+		return (dist);
 		}
 		prev_map_x = map_xy[0];
 		prev_map_y = map_xy[1];
