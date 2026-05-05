@@ -16,6 +16,8 @@
 # define ERROR_MLX_INIT "Error: Failed to initialize MLX."
 # define ERROR_WINDOW_INIT "Error: Failed to create a window."
 # define ERROR_IMAGE_INIT "Error: Failed to create an image."
+# define ERROR_TEXTURE "Error: Failed to load texture."
+
 
 int	print_error(const char *message);
 

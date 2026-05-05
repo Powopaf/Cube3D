@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO /home/pifourni/Documents/Github/Cube3D/Sprite/north_texture.xpm
+SO /home/pifourni/Documents/Github/Cube3D/Sprite/south_texture.xpm
+WE /home/pifourni/Documents/Github/Cube3D/Sprite/west_texture.xpm
+EA /home/pifourni/Documents/Github/Cube3D/Sprite/east_texture.xpm
 
 F 255,255,255
 C 0,0,0

@@ -17,6 +17,35 @@
 #include "minilibx-linux/mlx.h"
 #include "struct.h"
 
+static int load_spite(t_p *p, t_map *map, int index)
+{
+	p->sprite[index].img = mlx_xpm_file_to_image(p->data_struct->mlx,
+			map->texture_north, &p->sprite[index].width,
+			&p->sprite[index].height);
+	if (!p->sprite[index].img)
+		return (print_error(ERROR_TEXTURE));
+	p->sprite[index].texture = mlx_get_data_addr(p->sprite[index].img,
+			&p->sprite[index].bpp, &p->sprite[index].line_length,
+			&p->sprite[index].endian);
+	if (!p->sprite[index].texture)
+		return (print_error(ERROR_TEXTURE));
+	return (0);
+}
+
+static int	init_spite(t_map *map, t_p *p)
+{
+	int	index;
+
+	index = 0;
+	while (index < 4)
+	{
+		if (load_spite(p, map, index) == -1)
+			return (-1);
+		index++;
+	}
+	return (0);
+}
+
 static int	init(t_map *map, t_p *p, t_data *img)
 {
 	map->tile_size = min(SCREEN_WIDTH / map->map_width, SCREEN_HEIGHT
@@ -61,6 +90,8 @@ int	run(t_map *map)
 	t_p		p;
 
 	if (init(map, &p, &img) == -1)
+		return (-1);
+	if (init_spite(map, &p) == -1)
 		return (-1);
 	img.mlx = mlx_init();
 	if (!img.mlx)

@@ -54,6 +54,23 @@ typedef struct s_data
 	void				*win;
 }						t_data;
 
+typedef struct sprite
+{
+	int		width;
+	int		height;
+	char	*texture;
+	int		bpp;
+	int		line_length;
+	int		endian;
+	void	*img;
+} sprite;
+
+/*
+ * spite[0] = north
+ * sprite[1] = south
+ * sprite[2] = east
+ * sprite[3] = west
+*/
 typedef struct s_p
 {
 	double				x;
@@ -64,6 +81,7 @@ typedef struct s_p
 	int					tile_size;
 	t_map				*map_struct;
 	t_data				*data_struct;
+	sprite				sprite[4];
 }						t_p;
 
 #endif
