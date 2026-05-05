@@ -20,6 +20,7 @@ SRC = Src/Parser/extract_path.c \
 	  Src/Game/key.c \
 	  Src/Game/key_helper.c \
 	  Src/Window/exit_window.c \
+	  Src/Render/Sprite/sprite.c \
 	  main.c
 
 OBJ = $(addprefix .obj/,$(SRC:.c=.o))

@@ -3,6 +3,6 @@
 
 #include "struct.h"
 
-void	draw_sprite(t_p p, int x, int y, double w_x, int face);
+void	draw_sprite(t_p p, int pos[2], double w_x, int face, double y_lh[2]);
 
 #endif

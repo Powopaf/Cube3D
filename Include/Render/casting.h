@@ -18,5 +18,6 @@
 int		render(void *param);
 int		min(int a, int b);
 int		max(int a, int b);
+void	pixel(t_data *data, int x, int y, int color);
 
 #endif
