@@ -17,10 +17,24 @@
 #include "minilibx-linux/mlx.h"
 #include "struct.h"
 
-static int load_spite(t_p *p, t_map *map, int index)
+static char	*get_sprite_path(t_map *map, int index)
 {
+	if (index == 0)
+		return (map->texture_north);
+	if (index == 1)
+		return (map->texture_south);
+	if (index == 2)
+		return (map->texture_east);
+	return (map->texture_west);
+}
+
+static int	load_spite(t_p *p, t_map *map, int index)
+{
+	char	*path;
+
+	path = get_sprite_path(map, index);
 	p->sprite[index].img = mlx_xpm_file_to_image(p->data_struct->mlx,
-			map->texture_north, &p->sprite[index].width,
+			path, &p->sprite[index].width,
 			&p->sprite[index].height);
 	if (!p->sprite[index].img)
 		return (print_error(ERROR_TEXTURE));
