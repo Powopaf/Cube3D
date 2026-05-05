@@ -14,6 +14,7 @@
 #include "Render/ray.h"
 #include "struct.h"
 #include "minilibx-linux/mlx.h"
+#include "Render/Sprite/sprite.h"
 #include <math.h>
 
 static double	c_x(int i)
@@ -43,7 +44,7 @@ static void	draw_vertical_line(t_data *img, int x, int y_range[2], int color)
 	}
 }
 
-static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
+static void	draw(t_p p, double dist[3], t_wall wall, t_map map)
 {
 	int	y_lo;
 	int	y_hi;
@@ -53,22 +54,23 @@ static void	draw(t_data *img, double dist[3], t_face wallface, t_map map)
 			* dist[1]);
 	y_hi = (int)(((double)SCREEN_HEIGHT / 2.0) + (map.tile_size / dist[0])
 			* dist[1]);
-	color = 0xFFFFFF;
-	if (wallface == FACE_NORTH)
-		color = 0xE63946;
-	else if (wallface == FACE_SOUTH)
-		color = 0x06D6A0;
-	else if (wallface == FACE_EAST)
-		color = 0x118AB2;
-	else if (wallface == FACE_WEST)
-		color = 0xFFD166;
+	if (dist[0] == INFINITY)
+		draw_vertical_line(p.data_struct->img, (int)dist[2], (int [2]){max(0, y_lo),
+			min(SCREEN_HEIGHT - 1, y_hi)}, 0xFFFFFF);
+	if (wall.face == FACE_NORTH)
+		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[3], map.tile_size));
+	else if (wall.face == FACE_SOUTH)
+		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[3], map.tile_size));
+	else if (wall.face == FACE_EAST)
+		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[4], map.tile_size));
+	else if (wall.face == FACE_WEST)
+		draw_sprite(p, (int)dist[3], (int)dist[4], fmod(dist[4], map.tile_size));
 	else
-		color = 0xFFFFFF;
-	draw_vertical_line(img, (int)dist[2], (int [2]){0, y_lo - 1},
+		draw_vertical_line(p.data_struct->img, (int)dist[2], (int [2]){max(0, y_lo),
+			min(SCREEN_HEIGHT - 1, y_hi)}, 0xFFFFFF);
+	draw_vertical_line(p.data_struct->img, (int)dist[2], (int [2]){0, y_lo - 1},
 		map.color_sky);
-	draw_vertical_line(img, (int)dist[2], (int [2]){max(0, y_lo),
-		min(SCREEN_HEIGHT - 1, y_hi)}, color);
-	draw_vertical_line(img, (int)dist[2],
+	draw_vertical_line(p.data_struct->img, (int)dist[2],
 		(int [2]){y_hi + 1, SCREEN_HEIGHT - 1}, map.color_floor);
 }
 
@@ -80,7 +82,7 @@ int	render(void *param)
 {
 	t_p		*p;
 	int		i;
-	t_face	wall_face;
+	t_wall	wall;
 	double	ray_angle;
 	double	info[2];
 
@@ -90,12 +92,11 @@ int	render(void *param)
 	{
 		ray_angle = p->angle + atan(c_x(i) * tan(FOV / 2.0));
 		info[1] = (SCREEN_WIDTH / 2.0) / tan(FOV / 2.0);
-		info[0] = ray_dist(*p, ray_angle, *p->map_struct, &wall_face)
+		info[0] = ray_dist(*p, ray_angle, *p->map_struct, &wall)
 			* cos(ray_angle - p->angle);
 		if (info[0] < 0.0001)
 			info[0] = 0.0001;
-		draw(p->data_struct, (double [3]){info[0], info[1], (double)i},
-			wall_face, *p->map_struct);
+		draw(*p, (double [3]){info[0], info[1], (double)i}, wall, *p->map_struct);
 		i++;
 	}
 	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win,

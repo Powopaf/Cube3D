@@ -59,7 +59,7 @@ static void	find_face(t_face *face, int map_xy[2], double info[4], int prev[2])
 	}
 }
 
-double	ray_dist(t_p p, double ray_angle, t_map map, t_face *face)
+double	ray_dist(t_p p, double ray_angle, t_map map, t_wall *wall)
 {
 	double	info[4];
 	int		map_xy[2];
@@ -67,19 +67,23 @@ double	ray_dist(t_p p, double ray_angle, t_map map, t_face *face)
 	int		prev_map_y;
 	double	dist;
 
-	*face = FACE_UNKNOWN;
+	wall->face = FACE_UNKNOWN;
 	info[0] = cos(ray_angle);
 	info[1] = sin(ray_angle);
 	info[2] = p.x;
 	info[3] = p.y;
-	prev_map_x = (int)(info[2] / (double)map.tile_size);
-	prev_map_y = (int)(info[3] / (double)map.tile_size);
+	prev_map_x = (int)(info[2] / map.tile_size);
+	prev_map_y = (int)(info[3] / map.tile_size);
 	while (1)
 	{
 		dist = move_ray(info, map_xy, map, p);
-		if (dist >= 0)
+		if (dist == INFINITY)
+			break ;
+		if (dist >= 0.0)
 		{
-			find_face(face, map_xy, info, (int [2]){prev_map_x, prev_map_y});
+			find_face(&wall->face, map_xy, info, (int [2]){prev_map_x, prev_map_y});
+			wall->wall_x = (int)info[2] / map.tile_size;
+			wall->wall_y = (int)info[3] / map.tile_size;			
 			return (dist);
 		}
 		prev_map_x = map_xy[0];

@@ -33,6 +33,13 @@ typedef enum e_face
 	FACE_WEST
 }					t_face;
 
-double	ray_dist(t_p p, double ray_angle, t_map map, t_face *face);
+typedef struct s_wall
+{
+	t_face				face;
+	int					wall_x;
+	int					wall_y;
+}						t_wall;
+
+double	ray_dist(t_p p, double ray_angle, t_map map, t_wall *wall);
 
 #endif
