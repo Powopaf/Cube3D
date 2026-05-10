@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/05/04 14:45:46 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/05/10 21:14:15 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ static int	load_spite(t_p *p, t_map *map, int index)
 	char	*path;
 
 	path = get_sprite_path(map, index);
-	p->sprite[index].img = mlx_xpm_file_to_image(p->data_struct->mlx,
-			path, &p->sprite[index].width,
-			&p->sprite[index].height);
+	p->sprite[index].img = mlx_xpm_file_to_image(p->data_struct->mlx, path,
+			&p->sprite[index].width, &p->sprite[index].height);
 	if (!p->sprite[index].img)
 		return (print_error(ERROR_TEXTURE));
 	p->sprite[index].texture = mlx_get_data_addr(p->sprite[index].img,
@@ -84,19 +83,10 @@ static int	init(t_map *map, t_p *p, t_data *img)
 	return (0);
 }
 
-static void	game_loop(t_p *p, t_data *img)
-{
-	mlx_hook(img->win, 6, 1L << 6, mouse_press, p);
-	mlx_hook(img->win, 2, 1L << 0, key_press, p);
-	mlx_hook(img->win, 3, 1L << 1, key_release, p);
-	mlx_loop_hook(img->mlx, key_loop, p);
-	mlx_loop(img->mlx);
-}
-
 /*
-* mlx_mouse_hide leak
-* link to issue: https://github.com/42paris/minilibx-linux/issues/48
-*/
+ * mlx_mouse_hide leak
+ * link to issue: https://github.com/42paris/minilibx-linux/issues/48
+ */
 
 int	run(t_map *map)
 {
@@ -120,7 +110,7 @@ int	run(t_map *map)
 		return (print_error(ERROR_IMAGE_INIT));
 	if (init_spite(map, &p) == -1)
 		return (-1);
-	//mlx_mouse_hide(img.mlx, img.win);
+	// mlx_mouse_hide(img.mlx, img.win);
 	game_loop(&p, &img);
 	return (0);
 }

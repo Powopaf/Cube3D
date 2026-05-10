@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/10 21:45:21 by sbrochar          #+#    #+#             */
+/*   Updated: 2026/05/10 21:47:06 by sbrochar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Render/Sprite/sprite.h"
 #include "Render/casting.h"
 #include <math.h>
 
-static int clamp(double w, int size)
+static int	clamp(double w, int size)
 {
 	return (min(max(w, 0), size - 1));
 }
@@ -11,7 +23,7 @@ static int	get_w_x(t_p map, double pos[2], int face)
 {
 	double	w_x;
 	int		res;
-	
+
 	if (face < 2)
 	{
 		w_x = fmod(pos[0], (double)map.tile_size) / (double)map.tile_size;
@@ -46,9 +58,10 @@ void	draw_sprite(t_p p, double pos[2], int face[2], double y_lh[2])
 	while (i <= (int)y_lh[1])
 	{
 		w_y = (int)(((i - (int)y_lh[0]) * p.sprite[face[0]].height)
-			/ (double)(((int)y_lh[1] - (int)y_lh[0]) + 1));
+				/ (double)(((int)y_lh[1] - (int)y_lh[0]) + 1));
 		w_y = clamp(w_y, p.sprite[face[0]].height);
-		offset = w_y * p.sprite[face[0]].line_length + w_x * (p.sprite[face[0]].bpp / 8);
+		offset = w_y * p.sprite[face[0]].line_length + w_x
+			* (p.sprite[face[0]].bpp / 8);
 		color = *(unsigned int *)(p.sprite[face[0]].texture + offset);
 		pixel(p.data_struct, face[1], i, color);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:44:27 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 20:13:02 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/10 21:15:05 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "struct.h"
 
-int	run(t_map *map);
+int		run(t_map *map);
+void	game_loop(t_p *p, t_data *img);
 
 #endif

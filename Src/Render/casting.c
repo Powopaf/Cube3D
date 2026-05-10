@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 14:41:21 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/20 14:50:36 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/10 21:33:25 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,16 @@ static void	draw(t_p p, double dist[3], t_wall wall, t_map map)
 	if (dist[0] == INFINITY)
 		draw_vertical_line(p.data_struct, (int)dist[2], (int [2]){max(0, y_lo),
 			min(SCREEN_HEIGHT - 1, y_hi)}, 0xFFFFFF);
-	if (wall.face == FACE_NORTH)
-		draw_sprite(p, (double [2]){wall.wall_x, wall.wall_y}, (int [2]){wall.face, (int)dist[2]}, (double [2]){y_lo, y_hi});
-	else if (wall.face == FACE_SOUTH)
-		draw_sprite(p, (double [2]){wall.wall_x, wall.wall_y}, (int [2]){wall.face, (int)dist[2]}, (double [2]){y_lo, y_hi});
-	else if (wall.face == FACE_EAST)
-		draw_sprite(p, (double [2]){wall.wall_x, wall.wall_y}, (int [2]){wall.face, (int)dist[2]}, (double [2]){y_lo, y_hi});
-	else if (wall.face == FACE_WEST)
-		draw_sprite(p, (double [2]){wall.wall_x, wall.wall_y}, (int [2]){wall.face, (int)dist[2]}, (double [2]){y_lo, y_hi});
+	if (wall.face == FACE_NORTH || wall.face == FACE_SOUTH
+		|| wall.face == FACE_EAST || wall.face == FACE_WEST)
+		draw_sprite(p, (double [2]){wall.wall_x, wall.wall_y},
+			(int [2]){wall.face, (int)dist[2]}, (double [2]){y_lo, y_hi});
 	else
-		draw_vertical_line(p.data_struct, (int)dist[2], (int [2]){max(0, y_lo),
+		draw_vertical_line(p.data_struct, (int)dist[2],
+			(int [2]){max(0, y_lo),
 			min(SCREEN_HEIGHT - 1, y_hi)}, 0xFFFFFF);
-	draw_vertical_line(p.data_struct, (int)dist[2], (int [2]){0, y_lo - 1},
+	draw_vertical_line(p.data_struct, (int)dist[2],
+		(int [2]){0, y_lo - 1},
 		map.color_sky);
 	draw_vertical_line(p.data_struct, (int)dist[2],
 		(int [2]){y_hi + 1, SCREEN_HEIGHT - 1}, map.color_floor);
@@ -95,7 +93,8 @@ int	render(void *param)
 			* cos(ray_angle - p->angle);
 		if (info[0] < 0.0001)
 			info[0] = 0.0001;
-		draw(*p, (double [3]){info[0], info[1], (double)i}, wall, *p->map_struct);
+		draw(*p, (double [3]){info[0], info[1], (double)i},
+			wall, *p->map_struct);
 		i++;
 	}
 	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win,

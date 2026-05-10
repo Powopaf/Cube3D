@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:35:27 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 11:35:42 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/05/10 21:12:24 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define ERROR_WINDOW_INIT "Error: Failed to create a window."
 # define ERROR_IMAGE_INIT "Error: Failed to create an image."
 # define ERROR_TEXTURE "Error: Failed to load texture."
-
 
 int	print_error(const char *message);
 
