@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 17:23:59 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/05/07 20:33:02 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/11 21:07:30 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	valid_path(char *filename)
 	if (len < 5)
 		return (1);
 	if (filename[len - 4] == '.' && filename[len - 3] == 'x' && filename[len
-			- 2] == 'p' && filename[len - 1] == 'm')
+		- 2] == 'p' && filename[len - 1] == 'm')
 		return (0);
 	return (1);
 }
@@ -52,9 +52,14 @@ char	*extract_path_texture(char *tmp, int i)
 	path = ft_substr(tmp, i, len_path);
 	if (valid_path(path) == 1)
 		return (free(path), NULL);
+	fd = open(path, __O_DIRECTORY);
+	if (fd != -1)
+		return (write(2, "Error: This is a folder, not a file\n", 36),
+			free(path), NULL);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (free(path), NULL);
+		return (write(2, "Error: The file cannot be opened\n", 33), free(path),
+			NULL);
 	close(fd);
 	return (path);
 }
@@ -101,5 +106,5 @@ int	count_line_map(char *tmp, t_map *map)
 		return (0);
 	if (tmp[i] == '\n' || tmp[i] == '\0')
 		return (0);
-	return (write(2, "Error: Invalid parsing for texture or color\n", 44), 1);
+	return (1);
 }

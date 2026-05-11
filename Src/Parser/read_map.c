@@ -6,13 +6,14 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:31:38 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/09 11:57:08 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/11 15:28:42 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "GNL/gnl.h"
 #include "Parser/parser.h"
 #include <fcntl.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -30,6 +31,15 @@ void	init_data(t_map *map)
 	map->node_map = NULL;
 	map->map_width = 0;
 	map->map_height = 0;
+	map->map_lock = 0;
+}
+static void	free_gnl(int fd, char *line)
+{
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 }
 
 int	read_map(t_map *map, char *filename)
@@ -45,13 +55,13 @@ int	read_map(t_map *map, char *filename)
 		if (map->counter < 6)
 		{
 			if (count_line_map(line, map) == 1)
-				return (free(line), close(fd), 1);
+				return (free_gnl(fd, line), close(fd), 1);
 			free(line);
 		}
 		else if (map->counter == 6)
 		{
 			if (add_map_line(map, line) == 1)
-				return (free(line), close(fd), 1);
+				return (free_gnl(fd, line), close(fd), 1);
 			free(line);
 		}
 		line = get_next_line(fd);

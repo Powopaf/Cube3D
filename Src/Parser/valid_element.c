@@ -6,11 +6,13 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:53:35 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/09 11:21:47 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/11 22:39:38 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "GNL/gnl.h"
 #include "Parser/parser.h"
+#include <string.h>
 #include <unistd.h>
 
 void	store_map_info(char c, t_map *map, int x, int y)
@@ -39,7 +41,8 @@ int	scan_map_elements(char **map_coordinates, t_map *map)
 			c = map_coordinates[y][x];
 			if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W'
 				&& c != ' ' && c != 'E' && c != '\n' && c != '\r')
-				return (write(2, "Error: Bad element\n", 19), 1);
+				return (write(2, "Error: One element in map is incorrect\n",
+						39), 1);
 			store_map_info(c, map, x, y);
 			if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
 				map_coordinates[y][x] = '0';
@@ -48,7 +51,7 @@ int	scan_map_elements(char **map_coordinates, t_map *map)
 		y++;
 	}
 	if (map->player_count != 1)
-		return (1);
+		return (write(2, "Error: Incorrect number of players\n", 35), 1);
 	return (0);
 }
 
@@ -57,7 +60,6 @@ int	check_walls(char **map_coordinates, t_map *map)
 	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
 	while (y < map->map_height)
 	{
@@ -67,12 +69,14 @@ int	check_walls(char **map_coordinates, t_map *map)
 			if (map_coordinates[y][x] == '0')
 			{
 				if (y == 0 || y == map->map_height - 1 || x == 0
-					|| x == map->map_width - 1)
-					return (write(2, "Error: Hole in the map\n", 23), 1);
-				if (map_coordinates[y - 1][x] == ' ' || map_coordinates[y
-					+ 1][x] == ' ' || map_coordinates[y][x - 1] == ' '
-					|| map_coordinates[y][x + 1] == ' ')
-					return (write(2, "Error: Hole in the map\n", 23), 1);
+					|| !map_coordinates[y][x + 1])
+					return (write(2, "Error: Map border open\n", 23), 1);
+				if (x >= (int)ft_strlen(map_coordinates[y - 1])
+					|| map_coordinates[y - 1][x] == ' '
+					|| x >= (int)ft_strlen(map_coordinates[y + 1])
+					|| map_coordinates[y + 1][x] == ' ' || map_coordinates[y][x
+					- 1] == ' ' || map_coordinates[y][x + 1] == ' ')
+					return (write(2, "Error: Map leak detected\n", 25), 1);
 			}
 			x++;
 		}

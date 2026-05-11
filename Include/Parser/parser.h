@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:42:06 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/14 15:24:20 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/11 22:20:03 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "struct.h"
+# include <stddef.h>
 
 int		extract_color(char *tmp, int i);
 char	*extract_path_texture(char *tmp, int i);
@@ -35,6 +36,9 @@ void	store_map_info(char c, t_map *map, int x, int y);
 void	free_all_node(t_map *map);
 void	free_all_map(t_map *map);
 void	init_for_parsing(t_map *map);
+int		ft_iswhitespace(char c);
+int		empty_line(char *line);
+size_t	strlen_for_tab(char *str);
 int		parsing(t_map *map, char **av, int ac);
 
 #endif
