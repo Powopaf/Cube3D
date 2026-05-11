@@ -22,6 +22,8 @@
 # define KEY_RIGHT 65363
 # define KEY_DOWN 65364
 # define KEY_ESC 65307
+# define KEY_E 101
+# define KEY_R 114
 
 int		key_press(int keycode, void *param);
 int		key_release(int keycode, void *param);

@@ -20,6 +20,8 @@ static int	g_up;
 static int	g_down;
 static int	g_left;
 static int	g_right;
+static int	g_e;
+static int	g_r;
 
 static void	move_player(t_p *p, double angle_offset)
 {
@@ -55,6 +57,10 @@ int	key_press(int keycode, void *param)
 		g_left = 1;
 	else if (keycode == KEY_RIGHT)
 		g_right = 1;
+	else if (keycode == KEY_E)
+		g_e = 1;
+	else if (keycode == KEY_R)
+		g_r = 1;
 	else if (keycode == KEY_ESC)
 		close_window(p);
 	return (0);
@@ -71,6 +77,10 @@ int	key_release(int keycode, void *param)
 		g_left = 0;
 	else if (keycode == KEY_RIGHT)
 		g_right = 0;
+	else if (keycode == KEY_E)
+		g_e = 0;
+	else if (keycode == KEY_R)
+		g_r = 0;
 	return (0);
 }
 
@@ -87,6 +97,10 @@ int	key_loop(void *param)
 		move_player(p, p->angle - PI / 2.0);
 	if (g_right)
 		move_player(p, p->angle + PI / 2.0);
+	if (g_e)
+		p->angle += PI / 20.0;
+	if (g_r)
+		p->angle -= PI / 20.0;
 	p->angle = normalize_angle(p->angle);
 	render(p);
 	mlx_put_image_to_window(p->data_struct->mlx, p->data_struct->win,
