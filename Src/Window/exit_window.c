@@ -17,6 +17,10 @@
 
 static void	exit_game(t_p *p)
 {
+	mlx_destroy_image(p->data_struct->mlx, p->sprite[0].img);
+	mlx_destroy_image(p->data_struct->mlx, p->sprite[1].img);
+	mlx_destroy_image(p->data_struct->mlx, p->sprite[2].img);
+	mlx_destroy_image(p->data_struct->mlx, p->sprite[3].img);
 	mlx_destroy_window(p->data_struct->mlx, p->data_struct->win);
 	mlx_destroy_image(p->data_struct->mlx, p->data_struct->img);
 	mlx_loop_end(p->data_struct->mlx);
