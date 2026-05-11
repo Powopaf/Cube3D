@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 11:36:57 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 13:54:25 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/05/10 21:33:32 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 int		render(void *param);
 int		min(int a, int b);
 int		max(int a, int b);
+void	pixel(t_data *data, int x, int y, int color);
 
 #endif

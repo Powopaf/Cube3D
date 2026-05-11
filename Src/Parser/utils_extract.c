@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:01:44 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/01 18:42:35 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/07 20:27:18 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,43 @@ int	atoi_color(int color, int *i, char *tmp)
 	return (color);
 }
 
+static int	which_face(char *tmp, int i, char *face, char **path)
+{
+	if ((tmp[i] == face[0] && tmp[i + 1] == face[1] && tmp[i + 2] == ' ')
+		&& *path == NULL)
+	{
+		*path = extract_path_texture(tmp, i);
+		if (*path == NULL)
+			return (1);
+		return (0);
+	}
+	return (2);
+}
+
 int	parse_texture(char *tmp, int *i, t_map *map)
 {
-	if ((tmp[*i] == 'N' && tmp[*i + 1] == 'O' && tmp[*i + 2] == ' ')
-		&& map->texture_north == NULL)
-	{
-		map->texture_north = extract_path_texture(tmp, *i);
+	int	status;
+
+	status = which_face(tmp, *i, "NO", &map->texture_north);
+	if (status == 1)
+		return (1);
+	if (status == 0)
 		return (map->counter++, 0);
-	}
-	if ((tmp[*i] == 'S' && tmp[*i + 1] == 'O' && tmp[*i + 2] == ' ')
-		&& map->texture_south == NULL)
-	{
-		map->texture_south = extract_path_texture(tmp, *i);
+	status = which_face(tmp, *i, "SO", &map->texture_south);
+	if (status == 1)
+		return (1);
+	if (status == 0)
 		return (map->counter++, 0);
-	}
-	if ((tmp[*i] == 'W' && tmp[*i + 1] == 'E' && tmp[*i + 2] == ' ')
-		&& map->texture_west == NULL)
-	{
-		map->texture_west = extract_path_texture(tmp, *i);
+	status = which_face(tmp, *i, "WE", &map->texture_west);
+	if (status == 1)
+		return (1);
+	if (status == 0)
 		return (map->counter++, 0);
-	}
-	if ((tmp[*i] == 'E' && tmp[*i + 1] == 'A' && tmp[*i + 2] == ' ')
-		&& map->texture_east == NULL)
-	{
-		map->texture_east = extract_path_texture(tmp, *i);
+	status = which_face(tmp, *i, "EA", &map->texture_east);
+	if (status == 1)
+		return (1);
+	if (status == 0)
 		return (map->counter++, 0);
-	}
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:56:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/14 20:11:44 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/10 21:48:01 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,23 @@ typedef struct s_data
 	void				*win;
 }						t_data;
 
+typedef struct sprite
+{
+	int					width;
+	int					height;
+	char				*texture;
+	int					bpp;
+	int					line_length;
+	int					endian;
+	void				*img;
+}						t_sprite;
+
+/*
+ * spite[0] = north
+ * sprite[1] = south
+ * sprite[2] = east
+ * sprite[3] = west
+ */
 typedef struct s_p
 {
 	double				x;
@@ -64,6 +81,7 @@ typedef struct s_p
 	int					tile_size;
 	t_map				*map_struct;
 	t_data				*data_struct;
+	t_sprite			sprite[4];
 }						t_p;
 
 #endif

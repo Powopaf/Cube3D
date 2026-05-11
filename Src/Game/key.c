@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:45:07 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/20 15:03:12 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/10 21:11:33 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static void	move_player(t_p *p, double angle_offset)
 	new_x = (int)(p->x / (double)p->tile_size);
 	new_y = (int)(p->y / (double)p->tile_size);
 	if (new_x < 0 || new_y < 0 || new_x >= p->map_struct->map_width
-		|| new_y >= p->map_struct->map_height
-		|| p->map[new_y][new_x] == '1')
+		|| new_y >= p->map_struct->map_height || p->map[new_y][new_x] == '1')
 	{
 		p->x = old_x;
 		p->y = old_y;
@@ -106,7 +105,7 @@ int	mouse_press(int x, int y, void *param)
 		return (0);
 	d_x = (double)x - (SCREEN_WIDTH / 2.0);
 	p->angle = normalize_angle(p->angle + d_x * SENSITIVITY);
-	mlx_mouse_move(p->data_struct->mlx, p->data_struct->win,
-		SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_mouse_move(p->data_struct->mlx, p->data_struct->win, SCREEN_WIDTH / 2,
+		SCREEN_HEIGHT / 2);
 	return (0);
 }
