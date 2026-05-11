@@ -1,7 +1,7 @@
-NO /home/sbrochar/42/cercle_04/Cube3D/Sprite/north_texture.xpm
-SO /home/sbrochar/42/cercle_04/Cube3D/Sprite/south_texture.xpm
-WE /home/sbrochar/42/cercle_04/Cube3D/Sprite/west_texture.xpm
-EA /home/sbrochar/42/cercle_04/Cube3D/Sprite/east_texture.xpm
+NO ./Sprite/north_texture.xpm
+SO ./Sprite/south_texture.xpm
+WE ./Sprite/west_texture.xpm
+EA ./Sprite/east_texture.xpm
 
 F 255,255,255
 C 0,0,0

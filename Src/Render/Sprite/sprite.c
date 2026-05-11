@@ -38,6 +38,8 @@ static int	get_w_x(t_p map, double pos[2], int face)
 			w_x += 1.0;
 		res = (int)(w_x * (double)map.sprite[face].width);
 	}
+	if (face == 0 || face == 2)
+		res = map.sprite[face].width - 1 - res;
 	return (clamp(res, map.sprite[face].width));
 }
 
