@@ -13,6 +13,9 @@
 #ifndef GAME_H
 # define GAME_H
 
+# define FIXED_TILE_SIZE 16
+# define FIXED_SPEED 4
+
 # include "struct.h"
 
 int		run(t_map *map);
