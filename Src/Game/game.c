@@ -61,11 +61,10 @@ static int	init_spite(t_map *map, t_p *p)
 
 static int	init(t_map *map, t_p *p, t_data *img)
 {
-	map->tile_size = min(SCREEN_WIDTH / map->map_width, SCREEN_HEIGHT
-			/ map->map_height);
+	map->tile_size = FIXED_TILE_SIZE;
 	p->x = map->position_player_x * map->tile_size + map->tile_size / 2.0;
 	p->y = map->position_player_y * map->tile_size + map->tile_size / 2.0;
-	p->speed = map->tile_size / 10.0;
+	p->speed = FIXED_SPEED;
 	p->map = map->map;
 	p->tile_size = map->tile_size;
 	p->map_struct = map;
