@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 20:12:50 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/05/11 20:54:03 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/12 12:48:34 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
+
 static void	free_mlx(t_p *p)
 {
 	if (p->sprite[0].img != NULL)

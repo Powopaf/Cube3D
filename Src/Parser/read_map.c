@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:31:38 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/05/11 15:28:42 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/12 12:50:02 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_data(t_map *map)
 	map->map_height = 0;
 	map->map_lock = 0;
 }
+
 static void	free_gnl(int fd, char *line)
 {
 	while (line != NULL)

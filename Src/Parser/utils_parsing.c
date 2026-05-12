@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 21:55:12 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/05/11 22:23:27 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/12 12:50:47 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ int	empty_line(char *line)
 		return (1);
 	return (0);
 }
+
 size_t	strlen_for_tab(char *str)
 {
-	size_t count;
-	int i;
+	size_t	count;
+	int		i;
 
 	i = 0;
 	count = 0;

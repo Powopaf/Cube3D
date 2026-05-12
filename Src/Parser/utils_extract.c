@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:01:44 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/05/11 21:07:13 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:50:01 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parse_texture(char *tmp, int *i, t_map *map)
 		return (write(2, "Error: Invalid texture for the EA's face\n", 41), 1);
 	if (status == 0)
 		return (map->counter++, 0);
-	return (1);
+	return (2);
 }
 
 int	parse_colors(char *tmp, int *i, t_map *map)
@@ -84,5 +84,5 @@ int	parse_colors(char *tmp, int *i, t_map *map)
 		else
 			return (write(2, "Error: Wrong color code for the Sky\n", 36), 1);
 	}
-	return (1);
+	return (2);
 }

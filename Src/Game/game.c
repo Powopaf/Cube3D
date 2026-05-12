@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/05/11 20:50:13 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/12 12:48:51 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,3 @@ int	init(t_map *map, t_p *p, t_data *img)
 		return (-1);
 	return (0);
 }
-
-
-
-
