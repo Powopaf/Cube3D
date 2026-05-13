@@ -77,7 +77,7 @@ int	run(t_map *map)
 		return (print_error(ERROR_IMAGE_INIT));
 	if (init_spite(map, &p) != 0)
 		return (free_mlx(&p), -1);
-	// mlx_mouse_hide(img.mlx, img.win);
+	mlx_mouse_hide(img.mlx, img.win);
 	game_loop(&p, &img);
 	return (0);
 }
