@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:01:44 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/05/07 20:27:18 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:50:01 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,25 @@ int	parse_texture(char *tmp, int *i, t_map *map)
 
 	status = which_face(tmp, *i, "NO", &map->texture_north);
 	if (status == 1)
-		return (1);
+		return (write(2, "Error: Invalid texture for the NO's face\n", 41), 1);
 	if (status == 0)
 		return (map->counter++, 0);
 	status = which_face(tmp, *i, "SO", &map->texture_south);
 	if (status == 1)
-		return (1);
+		return (write(2, "Error: Invalid texture for the SO's face\n", 41), 1);
 	if (status == 0)
 		return (map->counter++, 0);
 	status = which_face(tmp, *i, "WE", &map->texture_west);
 	if (status == 1)
-		return (1);
+		return (write(2, "Error: Invalid texture for the WE's face\n", 41), 1);
 	if (status == 0)
 		return (map->counter++, 0);
 	status = which_face(tmp, *i, "EA", &map->texture_east);
 	if (status == 1)
-		return (1);
+		return (write(2, "Error: Invalid texture for the EA's face\n", 41), 1);
 	if (status == 0)
 		return (map->counter++, 0);
-	return (1);
+	return (2);
 }
 
 int	parse_colors(char *tmp, int *i, t_map *map)
@@ -74,7 +74,7 @@ int	parse_colors(char *tmp, int *i, t_map *map)
 		if (tmp_color != -1)
 			return (map->color_floor = tmp_color, map->counter++, 0);
 		else
-			return (write(2, "Error: Wrong color code\n", 24), 1);
+			return (write(2, "Error: Wrong color code for the Floor\n", 38), 1);
 	}
 	if (tmp[*i] == 'C' && tmp[*i + 1] == ' ' && map->color_sky == -1)
 	{
@@ -82,7 +82,7 @@ int	parse_colors(char *tmp, int *i, t_map *map)
 		if (tmp_color != -1)
 			return (map->color_sky = tmp_color, map->counter++, 0);
 		else
-			return (write(2, "Error: Wrong color code\n", 24), 1);
+			return (write(2, "Error: Wrong color code for the Sky\n", 36), 1);
 	}
-	return (1);
+	return (2);
 }

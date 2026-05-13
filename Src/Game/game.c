@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:12:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/05/10 21:14:15 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/12 12:48:51 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "Render/casting.h"
 #include "minilibx-linux/mlx.h"
 #include "struct.h"
+#include <string.h>
 
 static char	*get_sprite_path(t_map *map, int index)
 {
@@ -45,21 +46,21 @@ static int	load_spite(t_p *p, t_map *map, int index)
 	return (0);
 }
 
-static int	init_spite(t_map *map, t_p *p)
+int	init_spite(t_map *map, t_p *p)
 {
 	int	index;
 
 	index = 0;
 	while (index < 4)
 	{
-		if (load_spite(p, map, index) == -1)
+		if (load_spite(p, map, index) != 0)
 			return (-1);
 		index++;
 	}
 	return (0);
 }
 
-static int	init(t_map *map, t_p *p, t_data *img)
+int	init(t_map *map, t_p *p, t_data *img)
 {
 	map->tile_size = FIXED_TILE_SIZE;
 	p->x = map->position_player_x * map->tile_size + map->tile_size / 2.0;
@@ -79,37 +80,5 @@ static int	init(t_map *map, t_p *p, t_data *img)
 		p->angle = PI;
 	else
 		return (-1);
-	return (0);
-}
-
-/*
- * mlx_mouse_hide leak
- * link to issue: https://github.com/42paris/minilibx-linux/issues/48
- */
-
-int	run(t_map *map)
-{
-	t_data	img;
-	t_p		p;
-
-	if (init(map, &p, &img) == -1)
-		return (-1);
-	img.mlx = mlx_init();
-	if (!img.mlx)
-		return (print_error(ERROR_MLX_INIT));
-	img.win = mlx_new_window(img.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
-	if (!img.win)
-		return (print_error(ERROR_WINDOW_INIT));
-	img.img = mlx_new_image(img.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	if (!img.img)
-		return (print_error(ERROR_IMAGE_INIT));
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-			&img.endian);
-	if (!img.addr)
-		return (print_error(ERROR_IMAGE_INIT));
-	if (init_spite(map, &p) == -1)
-		return (-1);
-	// mlx_mouse_hide(img.mlx, img.win);
-	game_loop(&p, &img);
 	return (0);
 }

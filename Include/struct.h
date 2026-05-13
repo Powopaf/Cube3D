@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 13:56:38 by pifourni          #+#    #+#             */
-/*   Updated: 2026/05/10 21:48:01 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/11 14:38:13 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_map
 	int					color_sky;
 	int					player_count;
 	int					counter;
+	int					map_lock;
 	char				*texture_north;
 	char				*texture_south;
 	char				*texture_east;

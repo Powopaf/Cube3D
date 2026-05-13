@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 17:23:59 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/05/07 20:33:02 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:52:33 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,30 @@ static int	valid_path(char *filename)
 	return (1);
 }
 
+static char	*valid_fd(char *path)
+{
+	int	fd;
+
+	fd = open(path, __O_DIRECTORY);
+	if (fd != -1)
+		return (write(2, "Error: This is a folder, not a file\n", 36),
+			free(path), NULL);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (write(2, "Error: The file cannot be opened\n", 33), free(path),
+			NULL);
+	close(fd);
+	return (path);
+}
+
 char	*extract_path_texture(char *tmp, int i)
 {
 	int		len_path;
 	char	*path;
 	int		j;
-	int		fd;
 
 	i = i + 2;
 	len_path = 0;
-	fd = 0;
 	while (tmp[i] == ' ')
 		i++;
 	j = i;
@@ -51,12 +65,9 @@ char	*extract_path_texture(char *tmp, int i)
 	}
 	path = ft_substr(tmp, i, len_path);
 	if (valid_path(path) == 1)
-		return (free(path), NULL);
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (free(path), NULL);
-	close(fd);
-	return (path);
+		return (write(2, "Error: Invalid extension or path format\n", 40),
+			free(path), NULL);
+	return (valid_fd(path));
 }
 
 int	extract_color(char *tmp, int i)
@@ -91,15 +102,25 @@ int	extract_color(char *tmp, int i)
 int	count_line_map(char *tmp, t_map *map)
 {
 	int	i;
+	int	status;
 
+	status = 0;
 	i = 0;
 	while (tmp[i] == ' ')
 		i++;
-	if (parse_texture(tmp, &i, map) == 0)
+	status = parse_texture(tmp, &i, map);
+	if (status == 0)
 		return (0);
-	if (parse_colors(tmp, &i, map) == 0)
+	if (status == 1)
+		return (1);
+	status = parse_colors(tmp, &i, map);
+	if (status == 0)
 		return (0);
+	if (status == 1)
+		return (1);
 	if (tmp[i] == '\n' || tmp[i] == '\0')
 		return (0);
-	return (write(2, "Error: Invalid parsing for texture or color\n", 44), 1);
+	write(2, "Error: An element is not positioned correctly or is duplicated\n",
+		63);
+	return (1);
 }

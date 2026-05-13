@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 17:05:15 by sbrochar          #+#    #+#             */
-/*   Updated: 2026/04/20 14:40:17 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/12 10:53:13 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,10 @@ int	parsing(t_map *map, char **av, int ac)
 	if (valid_extension(av[1]) == 1)
 		return ((write(2, "Error: Bad extension\n", 21)), 1);
 	if (read_map(map, av[1]) == 1)
-		return ((write(2, "Error: Map reading problem\n", 27)),
-			free_all_map(map), 1);
+		return (free_all_map(map), 1);
 	if (scan_map_elements(map->map, map) == 1)
-		return ((write(2, "Error: Bad element in map\n", 26)),
-			free_all_map(map), 1);
+		return (free_all_map(map), 1);
 	if (check_walls(map->map, map) == 1)
-		return ((write(2, "Error: Problem with the walls\n", 30)),
-			free_all_map(map), 1);
+		return (free_all_map(map), 1);
 	return (0);
 }

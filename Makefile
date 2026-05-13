@@ -9,6 +9,7 @@ SRC = Src/Parser/extract_path.c \
 	  Src/Parser/valid_map.c \
 	  Src/Parser/utils_extract.c \
 	  Src/Parser/add_map.c \
+	  Src/Parser/utils_parsing.c \
 	  Src/Parser/parsing.c \
 	  Src/GNL/get_next_line_utils.c \
 	  Src/GNL/get_next_line.c \
@@ -17,6 +18,7 @@ SRC = Src/Parser/extract_path.c \
 	  Src/Render/ray.c \
 	  Src/Error/error.c \
 	  Src/Game/game.c \
+	  Src/Game/run.c \
 	  Src/Game/game_loop.c \
 	  Src/Game/key.c \
 	  Src/Game/key_helper.c \

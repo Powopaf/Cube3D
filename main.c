@@ -6,7 +6,7 @@
 /*   By: sbrochar <sbrochar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:42:22 by pifourni          #+#    #+#             */
-/*   Updated: 2026/04/20 15:15:42 by sbrochar         ###   ########.fr       */
+/*   Updated: 2026/05/11 20:10:41 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ int	main(int argc, char **argv)
 
 	if (parsing(&map, argv, argc) == 1)
 		return (1);
-	run(&map);
+	if (run(&map) != 0)
+	{
+		free_all_map(&map);
+		return (1);
+	}
 	return (0);
 }
