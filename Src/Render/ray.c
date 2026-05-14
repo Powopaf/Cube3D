@@ -46,16 +46,16 @@ static void	find_face(t_face *face, int map_xy[2], double info[4], int prev[2])
 	if (map_xy[0] != prev[0])
 	{
 		if (info[0] > 0.0)
-			*face = FACE_WEST;
-		else
 			*face = FACE_EAST;
+		else
+			*face = FACE_WEST;
 	}
 	else if (map_xy[1] != prev[1])
 	{
 		if (info[1] > 0.0)
-			*face = FACE_NORTH;
-		else
 			*face = FACE_SOUTH;
+		else
+			*face = FACE_NORTH;
 	}
 }
 
