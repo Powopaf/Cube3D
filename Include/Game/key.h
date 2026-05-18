@@ -17,10 +17,10 @@
 
 # define PI 3.14159265358979323846
 # define SENSITIVITY 0.0001
-# define KEY_UP 65362
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_DOWN 65364
+# define KEY_UP 119
+# define KEY_LEFT 97
+# define KEY_RIGHT 100
+# define KEY_DOWN 115
 # define KEY_ESC 65307
 # define KEY_E 101
 # define KEY_R 114
